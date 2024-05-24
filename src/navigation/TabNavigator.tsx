@@ -23,7 +23,7 @@ const screens = [
   {
     name: 'Cart',
     component: HomeNavigator,
-    iconName: 'shopping-outline',
+    iconName: 'basket-outline',
   },
   {
     name: 'Profile',
@@ -35,7 +35,7 @@ const screens = [
 const TabNavigator = () => {
   const theme = useTheme(); // Access the theme here
 
-  console.log(theme);
+  // console.log(theme);
   return (
     <Tab.Navigator
       screenOptions={{
@@ -59,6 +59,7 @@ const TabNavigator = () => {
                 <Text
                   style={{
                     fontSize: 10,
+                    fontFamily: 'DMSans-Medium',
                     color: focused ? theme.colors.primary : color,
                   }}>
                   {screen.name.toUpperCase()}
