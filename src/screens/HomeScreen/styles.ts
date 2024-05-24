@@ -6,9 +6,24 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'flex-end',
     alignItems: 'flex-start',
+    gap: 20,
+  },
+  screenContainer: {
+    width: '100%',
     paddingHorizontal: 24,
     paddingTop: 60,
-    gap: 20,
+  },
+  discoverFilterContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginTop: 16,
+  },
+  headerTitle: {
+    fontFamily: 'DM-Sans',
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: '#0E0C22',
   },
 });
 

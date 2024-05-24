@@ -14,21 +14,25 @@ const screens = [
     name: 'Home',
     component: HomeNavigator,
     iconName: 'home-variant-outline',
+    iconNameFocused: 'home-variant',
   },
   {
     name: 'Wishlist',
     component: HomeNavigator,
     iconName: 'heart-outline',
+    iconNameFocused: 'heart',
   },
   {
     name: 'Cart',
     component: HomeNavigator,
     iconName: 'basket-outline',
+    iconNameFocused: 'basket',
   },
   {
     name: 'Profile',
     component: HomeNavigator,
     iconName: 'account-outline',
+    iconNameFocused: 'account',
   },
 ];
 
@@ -67,7 +71,7 @@ const TabNavigator = () => {
               ),
               tabBarIcon: ({focused, color}) => (
                 <Icon
-                  name={screen.iconName}
+                  name={focused ? screen.iconNameFocused : screen.iconName}
                   color={focused ? theme.colors.primary : color}
                   size={24}
                 />
