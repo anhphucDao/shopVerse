@@ -10,8 +10,10 @@ const styles = StyleSheet.create({
   },
   screenContainer: {
     width: '100%',
+    height: '100%',
     paddingHorizontal: 24,
     paddingTop: 60,
+    backgroundColor: '#fff',
   },
   discoverFilterContainer: {
     flexDirection: 'row',
