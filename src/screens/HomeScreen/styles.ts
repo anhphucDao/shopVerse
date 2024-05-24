@@ -27,6 +27,17 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: '#0E0C22',
   },
+  searchBarContainer: {
+    marginTop: 12,
+  },
+  assistiveChipContainer: {
+    marginTop: 12,
+    flexDirection: 'row',
+    maxWidth: '100%',
+    gap: 4,
+    
+    flexWrap: 'wrap',
+  },
 });
 
 export default styles;
