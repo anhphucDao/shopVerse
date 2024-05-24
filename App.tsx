@@ -4,39 +4,42 @@ import {AppNavigator} from './src/navigation';
 import {MD3LightTheme, PaperProvider, configureFonts} from 'react-native-paper';
 
 //font config
-const fontConfig = {
-  default: {
-    regular: {
-      fontFamily: 'DMSans-Regular',
-      fontWeight: 'normal',
-    },
-    medium: {
-      fontFamily: 'DMSans-Medium',
-      fontWeight: 'normal',
-    },
-    light: {
-      fontFamily: 'DMSans-Light',
-      fontWeight: 'normal',
-    },
-    thin: {
-      fontFamily: 'DMSans-Thin',
-      fontWeight: 'normal',
-    },
-    semiBold: {
-      fontFamily: 'DMSans-SemiBold',
-      fontWeight: 'normal',
-    },
-    bold: {
-      fontFamily: 'DMSans-Bold',
-      fontWeight: 'normal',
-    },
-    black: {
-      fontFamily: 'DMSans-Black',
-      fontWeight: 'normal',
-    },
-  },
-};
+// const fontConfig = {
+//   default: {
+//     regular: {
+//       fontFamily: 'DMSans-Regular',
+//       fontWeight: 'normal',
+//     },
+//     medium: {
+//       fontFamily: 'DMSans-Medium',
+//       fontWeight: 'normal',
+//     },
+//     light: {
+//       fontFamily: 'DMSans-Light',
+//       fontWeight: 'normal',
+//     },
+//     thin: {
+//       fontFamily: 'DMSans-Thin',
+//       fontWeight: 'normal',
+//     },
+//     semiBold: {
+//       fontFamily: 'DMSans-SemiBold',
+//       fontWeight: 'normal',
+//     },
+//     bold: {
+//       fontFamily: 'DMSans-Bold',
+//       fontWeight: 'normal',
+//     },
+//     black: {
+//       fontFamily: 'DMSans-Black',
+//       fontWeight: 'normal',
+//     },
+//   },
+// };
 
+const fontConfig = {
+  fontFamily: 'DMSans',
+};
 //config theme
 const theme = {
   MD3LightTheme,
