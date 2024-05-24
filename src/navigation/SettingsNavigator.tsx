@@ -8,7 +8,7 @@ const SettingsStack = createNativeStackNavigator();
 const SettingsNavigator = () => {
   return (
     <SettingsStack.Navigator>
-      <SettingsStack.Screen name="Settings" component={SettingsScreen} />
+      <SettingsStack.Screen name="settings" component={SettingsScreen} />
       <SettingsStack.Screen name="Details" component={DetailsScreen} />
     </SettingsStack.Navigator>
   );
