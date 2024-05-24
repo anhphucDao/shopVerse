@@ -1,7 +1,41 @@
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {AppNavigator} from './src/navigation';
-import {MD3LightTheme, PaperProvider} from 'react-native-paper';
+import {MD3LightTheme, PaperProvider, configureFonts} from 'react-native-paper';
+
+//font config
+const fontConfig = {
+  default: {
+    regular: {
+      fontFamily: 'DMSans-Regular',
+      fontWeight: 'normal',
+    },
+    medium: {
+      fontFamily: 'DMSans-Medium',
+      fontWeight: 'normal',
+    },
+    light: {
+      fontFamily: 'DMSans-Light',
+      fontWeight: 'normal',
+    },
+    thin: {
+      fontFamily: 'DMSans-Thin',
+      fontWeight: 'normal',
+    },
+    semiBold: {
+      fontFamily: 'DMSans-SemiBold',
+      fontWeight: 'normal',
+    },
+    bold: {
+      fontFamily: 'DMSans-Bold',
+      fontWeight: 'normal',
+    },
+    black: {
+      fontFamily: 'DMSans-Black',
+      fontWeight: 'normal',
+    },
+  },
+};
 
 //config theme
 const theme = {
@@ -17,6 +51,7 @@ const theme = {
     tertiary: '#EBEEEF',
     onTeritary: '#1A1C16',
   },
+  fonts: configureFonts({config: fontConfig}),
 };
 
 export default function App() {
