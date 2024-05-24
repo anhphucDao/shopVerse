@@ -15,7 +15,10 @@ const AppNavigator = () => {
   }, []);
 
   return (
-    <RootStack.Navigator>
+    <RootStack.Navigator
+      screenOptions={{
+        headerShown: false,
+      }}>
       {isLoading ? (
         <RootStack.Screen name="Splash" component={SplashScreen} />
       ) : (
