@@ -10,14 +10,16 @@ export default function ShoppingBag() {
     <View style={styles.container}>
       <IconButton
         icon="shopping-outline"
-        size={32}
+        size={24}
         iconColor={theme.colors.primary}
         style={styles.icon}
         onPress={() => {
           console.log('Shopping bag pressed');
         }}
       />
-      <Badge style={styles.badge}>3</Badge>
+      <Badge style={styles.badge} size={16}>
+        3
+      </Badge>
     </View>
   );
 }
