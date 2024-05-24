@@ -35,8 +35,14 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     maxWidth: '100%',
     gap: 4,
-    
+
     flexWrap: 'wrap',
+  },
+  productContainer: {
+    marginTop: 16,
+    // flexDirection: 'row',
+    // flexWrap: 'wrap',
+    // maxHeight: 1000,
   },
 });
 
