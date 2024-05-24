@@ -1,9 +1,12 @@
-import {NativeStackScreenProps} from '@react-navigation/native-stack';
+import {NavigationProp} from '@react-navigation/native';
 
 type RootTabParamList = {
   Home: undefined;
   Settings: undefined;
   Details: undefined;
+  // navigate: (screen: string) => void;
 };
 
-export type HomeScreenProps = NativeStackScreenProps<RootTabParamList, 'Home'>;
+export type HomeScreenProps = {
+  navigation?: NavigationProp<RootTabParamList, 'Home'>;
+};
