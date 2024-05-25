@@ -12,7 +12,7 @@ const HomeNavigator = () => {
         headerShown: false,
       }}>
       <HomeStack.Screen name="home" component={HomeScreen} />
-      <HomeStack.Screen name="Details" component={DetailsScreen} />
+      <HomeStack.Screen name="details" component={DetailsScreen} />
     </HomeStack.Navigator>
   );
 };

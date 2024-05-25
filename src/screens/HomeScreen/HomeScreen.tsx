@@ -40,7 +40,8 @@ export default function HomeScreen({navigation}: HomeScreenProps) {
             name={item.title}
             price={item.price}
             imageUrl={item.image}
-            navigation = {navigation}
+            navigation={navigation}
+            itemId={item.id}
           />
         )}
         columnWrapperStyle={{justifyContent: 'space-between'}}

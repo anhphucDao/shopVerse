@@ -5,7 +5,13 @@ import Comment from '../../components/Comment';
 import Footer from '../../components/Footer';
 import styles from './styles';
 
-export default function DetailsScreen({navigation}) {
+export default function DetailsScreen({navigation, route}) {
+  //use this itemId to fetch data from the server
+  const {itemId} = route.params;
+
+  console.log('Details Screen, route: ', route);
+  console.log('Details Screen, itemId: ', itemId);
+
   return (
     <View style={styles.screenContainer}>
       <DetailHeader navigation={navigation} />
