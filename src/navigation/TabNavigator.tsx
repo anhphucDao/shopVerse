@@ -2,8 +2,8 @@
 import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import HomeNavigator from './HomeNavigator';
-import DetailsScreen from '../screens/DetailsScreen';
-// import SettingsNavigator from './SettingsNavigator';
+// import DetailsScreen from '../screens/DetailsScreen';
+import EmptyScreen from '../screens/EmptyScreen';
 import {useTheme} from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {Text} from 'react-native';
@@ -20,19 +20,19 @@ const screens = [
   },
   {
     name: 'Wishlist',
-    component: DetailsScreen,
+    component: EmptyScreen,
     iconName: 'heart-outline',
     iconNameFocused: 'heart',
   },
   {
     name: 'Cart',
-    component: HomeNavigator,
+    component: EmptyScreen,
     iconName: 'basket-outline',
     iconNameFocused: 'basket',
   },
   {
     name: 'Profile',
-    component: HomeNavigator,
+    component: EmptyScreen,
     iconName: 'account-outline',
     iconNameFocused: 'account',
   },
