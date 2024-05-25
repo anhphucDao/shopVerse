@@ -9,12 +9,6 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {Text} from 'react-native';
 import {getFocusedRouteNameFromRoute} from '@react-navigation/native';
 
-type RootStackParamList = {
-  home: undefined;
-  details: {itemId: number};
-  // other routes...
-};
-
 const Tab = createBottomTabNavigator();
 
 const screens = [
