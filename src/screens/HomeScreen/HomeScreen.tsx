@@ -5,7 +5,7 @@ import Filter from '../../components/Filter';
 import SearchBar from '../../components/SearchBar';
 import AssistiveChip from '../../components/AssistiveChip';
 import Product from '../../components/Product';
-import {FlatList, ScrollView, Text, View} from 'react-native';
+import {FlatList, Text, View} from 'react-native';
 import {HomeScreenProps} from './type';
 import styles from './styles';
 
@@ -40,6 +40,8 @@ export default function HomeScreen({navigation}: HomeScreenProps) {
             name={item.title}
             price={item.price}
             imageUrl={item.image}
+            navigation={navigation}
+            itemId={item.id}
           />
         )}
         columnWrapperStyle={{justifyContent: 'space-between'}}
