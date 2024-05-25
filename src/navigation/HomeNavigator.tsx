@@ -7,7 +7,10 @@ const HomeStack = createNativeStackNavigator();
 
 const HomeNavigator = () => {
   return (
-    <HomeStack.Navigator>
+    <HomeStack.Navigator
+      screenOptions={{
+        headerShown: false,
+      }}>
       <HomeStack.Screen name="home" component={HomeScreen} />
       <HomeStack.Screen name="Details" component={DetailsScreen} />
     </HomeStack.Navigator>
