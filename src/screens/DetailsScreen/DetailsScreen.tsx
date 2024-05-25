@@ -5,10 +5,10 @@ import Comment from '../../components/Comment';
 import Footer from '../../components/Footer';
 import styles from './styles';
 
-export default function DetailsScreen() {
+export default function DetailsScreen({navigation}) {
   return (
     <View style={styles.screenContainer}>
-      <DetailHeader />
+      <DetailHeader navigation={navigation} />
       <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
         <View>
           <View style={styles.imageContainer}>

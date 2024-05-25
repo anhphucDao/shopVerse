@@ -3,14 +3,17 @@ import {View} from 'react-native';
 import styles from './styles';
 import {IconButton, useTheme} from 'react-native-paper';
 
-export default function DetailHeader() {
+export default function DetailHeader({navigation}) {
   const theme = useTheme();
 
   return (
     <View style={styles.container}>
       <IconButton
         icon="keyboard-backspace"
-        onPress={() => console.log('Go back')}
+        onPress={() => {
+          console.log('Go back');
+          navigation.goBack();
+        }}
         size={28}
         iconColor={theme.colors.primary}
       />
