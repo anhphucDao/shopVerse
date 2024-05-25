@@ -2,11 +2,15 @@ import React from 'react';
 import styles from './styles';
 import {Image, Pressable, Text, View} from 'react-native';
 
-export default function Product({name, price, imageUrl}) {
+export default function Product({name, price, imageUrl, navigation}) {
   console.log('Product Component, imageUrl: ', imageUrl);
 
   return (
-    <Pressable onPress={() => console.log('Product Pressed')}>
+    <Pressable
+      onPress={() => {
+        console.log('Product Pressed');
+        navigation.navigate('Wishlist');
+      }}>
       <View style={styles.product}>
         <Image source={{uri: imageUrl}} style={styles.image} />
         <Text style={styles.name} numberOfLines={3}>
