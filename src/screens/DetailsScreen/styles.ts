@@ -8,6 +8,17 @@ const styles = StyleSheet.create({
     paddingTop: 52,
     paddingHorizontal: 24,
   },
+  image: {
+    width: 313,
+    height: 395,
+    resizeMode: 'contain',
+  },
+
+  imageContainer: {
+    flex: 1,
+    marginTop: 12,
+    alignItems: 'center',
+  },
 });
 
 export default styles;
