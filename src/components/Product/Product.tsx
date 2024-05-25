@@ -6,7 +6,7 @@ export default function Product({name, price, imageUrl}) {
   console.log('Product Component, imageUrl: ', imageUrl);
 
   return (
-    <Pressable>
+    <Pressable onPress={() => console.log('Product Pressed')}>
       <View style={styles.product}>
         <Image source={{uri: imageUrl}} style={styles.image} />
         <Text style={styles.name} numberOfLines={3}>

@@ -2,6 +2,7 @@
 import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import HomeNavigator from './HomeNavigator';
+import DetailsScreen from '../screens/DetailsScreen';
 // import SettingsNavigator from './SettingsNavigator';
 import {useTheme} from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -18,7 +19,7 @@ const screens = [
   },
   {
     name: 'Wishlist',
-    component: HomeNavigator,
+    component: DetailsScreen,
     iconName: 'heart-outline',
     iconNameFocused: 'heart',
   },

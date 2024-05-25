@@ -5,7 +5,7 @@ import Filter from '../../components/Filter';
 import SearchBar from '../../components/SearchBar';
 import AssistiveChip from '../../components/AssistiveChip';
 import Product from '../../components/Product';
-import {FlatList, ScrollView, Text, View} from 'react-native';
+import {FlatList, Text, View} from 'react-native';
 import {HomeScreenProps} from './type';
 import styles from './styles';
 

@@ -1,11 +1,14 @@
 import React from 'react';
-import {Text, View} from 'react-native';
+import {Text, ScrollView, View} from 'react-native';
+import DetailHeader from '../../components/DetailHeader';
 import styles from './styles';
 
 export default function DetailsScreen() {
   return (
-    <View style={styles.container}>
-      <Text>Details!</Text>
-    </View>
+    <ScrollView style={styles.container}>
+      <View>
+        <DetailHeader />
+      </View>
+    </ScrollView>
   );
 }
