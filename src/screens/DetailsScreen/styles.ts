@@ -1,11 +1,17 @@
 import {StyleSheet} from 'react-native';
 
 const styles = StyleSheet.create({
+  screenContainer: {
+    position: 'relative',
+    paddingTop: 108,
+    paddingBottom: 96,
+  },
+
   container: {
     width: '100%',
     height: '100%',
     backgroundColor: '#FFFFFF',
-    paddingTop: 52,
+    // paddingTop: 120,
     paddingHorizontal: 24,
   },
   image: {
@@ -16,8 +22,28 @@ const styles = StyleSheet.create({
 
   imageContainer: {
     flex: 1,
-    marginTop: 12,
     alignItems: 'center',
+  },
+
+  textContainer: {
+    marginTop: 16,
+  },
+
+  title: {
+    fontFamily: 'DM-Sans',
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: '#0E0C22',
+    lineHeight: 30,
+  },
+
+  description: {
+    fontFamily: 'DM-Sans',
+    fontSize: 16,
+    color: '#1A1C16',
+    fontWeight: 'medium',
+    marginTop: 16,
+    lineHeight: 26,
   },
 });
 

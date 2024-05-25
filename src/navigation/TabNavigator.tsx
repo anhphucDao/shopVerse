@@ -43,16 +43,27 @@ const TabNavigator = () => {
   // console.log(theme);
   return (
     <Tab.Navigator
-      screenOptions={{
+      // screenOptions={{
+      //   headerShown: false,
+      //   tabBarStyle: {
+      //     flexDirection: 'row',
+      //     shadowColor: '#000',
+      //     shadowOpacity: 0.1,
+      //     shadowOffset: {width: 0, height: -1},
+      //     elevation: 10, // This is for Android
+      //   },
+      // }}
+      screenOptions={({route}) => ({
         headerShown: false,
         tabBarStyle: {
+          display: route.name === 'Wishlist' ? 'none' : 'flex',
           flexDirection: 'row',
           shadowColor: '#000',
           shadowOpacity: 0.1,
           shadowOffset: {width: 0, height: -1},
           elevation: 10, // This is for Android
         },
-      }}>
+      })}>
       {screens.map(screen => {
         return (
           <Tab.Screen
