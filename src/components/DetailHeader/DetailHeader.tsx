@@ -2,6 +2,7 @@ import React from 'react';
 import {View} from 'react-native';
 import styles from './styles';
 import {IconButton, useTheme} from 'react-native-paper';
+// import BottomSheet from '../../components/BottomSheet';
 
 export default function DetailHeader({navigation}) {
   const theme = useTheme();

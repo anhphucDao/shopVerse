@@ -2,8 +2,23 @@ import React from 'react';
 import {IconButton, useTheme} from 'react-native-paper';
 import styles from './styles';
 
-export default function Filter() {
+export default function Filter({
+  openBottomSheet,
+  closeBottomSheet,
+  isOpen,
+  setIsOpen,
+}) {
   const theme = useTheme();
+
+  function bottomSheetHandler() {
+    if (isOpen) {
+      setIsOpen(false);
+      closeBottomSheet();
+    } else {
+      setIsOpen(true);
+      openBottomSheet();
+    }
+  }
 
   return (
     <IconButton
@@ -12,7 +27,7 @@ export default function Filter() {
       iconColor={theme.colors.primary}
       style={styles.IconButton}
       onPress={() => {
-        console.log('Filter pressed');
+        bottomSheetHandler();
       }}
     />
   );
