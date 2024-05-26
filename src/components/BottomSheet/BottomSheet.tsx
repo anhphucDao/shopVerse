@@ -10,7 +10,7 @@ import styles from './styles';
 export default function BottomSheetComponent({bottomSheetRef}) {
   //use this useEffect to initially hide the bottom sheet
 
-  const snapPoints = useMemo(() => ['50%', '75%'], []);
+  const snapPoints = useMemo(() => ['60%', '70%'], []);
 
   return (
     // <View style={styles.container}>
