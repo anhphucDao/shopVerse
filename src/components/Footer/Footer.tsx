@@ -12,6 +12,7 @@ export default function Footer() {
         style={styles.button}
         buttonColor="#0E0C22"
         labelStyle={styles.labelStyle}
+        contentStyle={styles.contentStyle}
         onPress={() => {
           console.log('Add to cart pressed');
         }}>

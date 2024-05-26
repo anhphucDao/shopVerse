@@ -18,21 +18,25 @@ export default function PriceFilter() {
         </View>
         <View style={styles.inputContainer}>
           <TextInput
-            label="From $0"
-            mode="outlined"
+            placeholder="From $0"
+            mode="flat"
             style={styles.textInput}
             keyboardType="numeric"
             outlineStyle={styles.inputOutline}
             textColor="#0E0C22"
+            underlineColor="transparent"
+            activeUnderlineColor="transparent"
           />
           <View style={styles.divider} />
           <TextInput
-            label="To $1000"
-            mode="outlined"
+            placeholder="To $1000"
+            mode="flat"
             style={styles.textInput}
             keyboardType="numeric"
             outlineStyle={styles.inputOutline}
             textColor="#0E0C22"
+            underlineColor="transparent"
+            activeUnderlineColor="transparent"
           />
         </View>
       </View>

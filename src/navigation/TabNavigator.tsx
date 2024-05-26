@@ -4,6 +4,7 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import HomeNavigator from './HomeNavigator';
 // import DetailsScreen from '../screens/DetailsScreen';
 import EmptyScreen from '../screens/EmptyScreen';
+import LoginScreen from '../screens/LoginScreen';
 import {useTheme} from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {Text} from 'react-native';
@@ -32,7 +33,7 @@ const screens = [
   },
   {
     name: 'Profile',
-    component: EmptyScreen,
+    component: LoginScreen,
     iconName: 'account-outline',
     iconNameFocused: 'account',
   },
