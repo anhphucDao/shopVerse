@@ -6,10 +6,12 @@ import SearchBar from '../../components/SearchBar';
 import AssistiveChip from '../../components/AssistiveChip';
 import Product from '../../components/Product';
 import BottomSheetComponent from '../../components/BottomSheet';
-import {FlatList, Text, View} from 'react-native';
+import DismissKeyboard from '../../components/DismissKeyboard';
+import {FlatList, ScrollView, Text, View} from 'react-native';
 import {HomeScreenProps} from './type';
 import styles from './styles';
 import {useRef} from 'react';
+import {Keyboard} from 'react-native';
 // import { useRef } from 'react';
 import BottomSheet from '@gorhom/bottom-sheet';
 
@@ -33,6 +35,7 @@ export default function HomeScreen({navigation}: HomeScreenProps) {
   //function to close bottom sheet
   const closeBottomSheet = () => {
     bottomSheetRef.current?.close();
+    Keyboard.dismiss();
   };
 
   //state to manage bottom sheet visibility
@@ -41,12 +44,19 @@ export default function HomeScreen({navigation}: HomeScreenProps) {
   return (
     <>
       <View style={styles.screenContainer}>
-        <View style={styles.container}>
-          <ShoppingBag />
-          <Avatar />
-        </View>
-        <View style={styles.discoverFilterContainer}>
+        <View style={styles.header}>
           <Text style={styles.headerTitle}>Discover Products</Text>
+          <View style={styles.container}>
+            <ShoppingBag />
+            <Avatar />
+          </View>
+        </View>
+
+        <View style={styles.discoverFilterContainer}>
+          <DismissKeyboard>
+            <SearchBar />
+          </DismissKeyboard>
+
           <Filter
             openBottomSheet={openBottomSheet}
             closeBottomSheet={closeBottomSheet}
@@ -54,18 +64,17 @@ export default function HomeScreen({navigation}: HomeScreenProps) {
             setIsOpen={setIsOpen}
           />
         </View>
-        <View style={styles.searchBarContainer}>
+        {/* <View style={styles.searchBarContainer}>
           <SearchBar />
-        </View>
-        <View style={styles.assistiveChipContainer}>
-          {/* <AssistiveChip />
-          <AssistiveChip />
-          <AssistiveChip />
-          <AssistiveChip /> */}
+        </View> */}
+        <ScrollView
+          style={styles.assistiveChipContainer}
+          horizontal
+          showsHorizontalScrollIndicator={false}>
           {categories.map((category, index) => (
             <AssistiveChip key={index} title={category} />
           ))}
-        </View>
+        </ScrollView>
         {/* <View style={styles.productContainer}> */}
         <FlatList
           data={data}

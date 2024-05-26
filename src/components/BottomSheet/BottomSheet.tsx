@@ -6,6 +6,8 @@ import PriceFilter from '../PriceFilter';
 import RatingFilter from '../RatingFilter';
 import ButtonFilter from '../ButtonFilter';
 import styles from './styles';
+import {Keyboard} from 'react-native';
+import DismissKeyboard from '../DismissKeyboard';
 
 export default function BottomSheetComponent({bottomSheetRef}) {
   //use this useEffect to initially hide the bottom sheet
@@ -14,17 +16,27 @@ export default function BottomSheetComponent({bottomSheetRef}) {
 
   return (
     // <View style={styles.container}>
+
     <BottomSheet
       index={-1}
       snapPoints={snapPoints}
       ref={bottomSheetRef}
-      enablePanDownToClose={true}>
+      enablePanDownToClose={true}
+      onAnimate={(fromIndex, toIndex) => {
+        if (toIndex < fromIndex) {
+          Keyboard.dismiss();
+        }
+      }}>
       <View style={styles.contentContainer}>
-        <PriceFilter />
+        <DismissKeyboard>
+          <PriceFilter />
+        </DismissKeyboard>
+
         <RatingFilter />
         <ButtonFilter />
       </View>
     </BottomSheet>
+
     // </View>
   );
 }

@@ -6,6 +6,9 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     alignSelf: 'flex-start',
     marginBottom: 8,
+    minHeight: 32,
+    maxHeight: 32,
+    marginRight: 8,
   },
   chipText: {
     color: '#1A1C16',
