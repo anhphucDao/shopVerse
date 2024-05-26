@@ -6,6 +6,7 @@ import SearchBar from '../../components/SearchBar';
 import AssistiveChip from '../../components/AssistiveChip';
 import Product from '../../components/Product';
 import BottomSheetComponent from '../../components/BottomSheet';
+import DismissKeyboard from '../../components/DismissKeyboard';
 import {FlatList, ScrollView, Text, View} from 'react-native';
 import {HomeScreenProps} from './type';
 import styles from './styles';
@@ -50,7 +51,10 @@ export default function HomeScreen({navigation}: HomeScreenProps) {
         </View>
 
         <View style={styles.discoverFilterContainer}>
-          <SearchBar />
+          <DismissKeyboard>
+            <SearchBar />
+          </DismissKeyboard>
+
           <Filter
             openBottomSheet={openBottomSheet}
             closeBottomSheet={closeBottomSheet}
