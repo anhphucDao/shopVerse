@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {View, Text, Image} from 'react-native';
 import styles from './styles';
-import {TextInput} from 'react-native-paper';
+import {Button, TextInput} from 'react-native-paper';
 
 export default function LoginScreen() {
   const [showPassword, setShowPassword] = useState(false);
@@ -49,6 +49,17 @@ export default function LoginScreen() {
             }
           />
         </View>
+      </View>
+      <Button
+        style={styles.button}
+        contentStyle={styles.contentStyle}
+        textColor="#FFF"
+        onPress={() => console.log('Pressed')}>
+        Sign In
+      </Button>
+      <View style={styles.bottomTextContainer}>
+        <Text style={styles.forgotPassword}>Forgot Password?</Text>
+        <Text style={styles.signUp}>Sign Up</Text>
       </View>
     </View>
   );

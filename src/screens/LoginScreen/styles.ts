@@ -41,6 +41,40 @@ const styles = StyleSheet.create({
     fontWeight: 'medium',
     color: '#0E0C22',
   },
+  button: {
+    width: '100%',
+    height: 50,
+    backgroundColor: '#0E0C22',
+    borderRadius: 10,
+    marginTop: 40,
+  },
+  contentStyle: {
+    width: '100%',
+    height: '100%',
+    fontFamily: 'DM-Sans',
+    fontSize: 20,
+    fontWeight: 'medium',
+    color: '#FFFFFF',
+  },
+  bottomTextContainer: {
+    flexDirection: 'row',
+    marginTop: 32,
+    justifyContent: 'space-between',
+    width: '100%',
+  },
+  forgotPassword: {
+    fontFamily: 'DM-Sans',
+    fontSize: 16,
+    fontWeight: 'medium',
+    color: '#0E0C22',
+    textDecorationLine: 'underline',
+  },
+  signUp: {
+    fontFamily: 'DM-Sans',
+    fontSize: 16,
+    fontWeight: 'medium',
+    color: '#0E0C22',
+  },
 });
 
 export default styles;
