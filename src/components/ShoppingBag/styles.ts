@@ -3,6 +3,7 @@ import {StyleSheet} from 'react-native';
 const styles = StyleSheet.create({
   container: {
     position: 'relative',
+    marginTop: -12,
   },
   icon: {
     position: 'absolute',

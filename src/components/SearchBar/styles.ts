@@ -4,6 +4,8 @@ const styles = StyleSheet.create({
   searchBar: {
     backgroundColor: '#FAFAFA',
     borderRadius: 12,
+    flex: 1,
+    // marginRight: 16,
   },
   input: {
     color: '#0E0C22',
