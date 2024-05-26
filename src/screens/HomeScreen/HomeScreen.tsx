@@ -15,6 +15,13 @@ import BottomSheet from '@gorhom/bottom-sheet';
 
 import data from '../../data/productList';
 
+const categories = [
+  'electronics',
+  'jewelery',
+  "men's clothing",
+  "women's clothing",
+];
+
 export default function HomeScreen({navigation}: HomeScreenProps) {
   const bottomSheetRef = useRef<BottomSheet>(null);
 
@@ -51,10 +58,13 @@ export default function HomeScreen({navigation}: HomeScreenProps) {
           <SearchBar />
         </View>
         <View style={styles.assistiveChipContainer}>
+          {/* <AssistiveChip />
           <AssistiveChip />
           <AssistiveChip />
-          <AssistiveChip />
-          <AssistiveChip />
+          <AssistiveChip /> */}
+          {categories.map((category, index) => (
+            <AssistiveChip key={index} title={category} />
+          ))}
         </View>
         {/* <View style={styles.productContainer}> */}
         <FlatList

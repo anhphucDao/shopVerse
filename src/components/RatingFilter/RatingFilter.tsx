@@ -15,6 +15,7 @@ export default function RatingFilter() {
             <Chip
               style={styles.chip}
               textStyle={styles.chipText}
+              key={rating}
               onPress={() => {
                 console.log('Rating Filter Pressed');
               }}>

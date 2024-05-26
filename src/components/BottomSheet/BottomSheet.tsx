@@ -1,9 +1,10 @@
 import React from 'react';
 import BottomSheet from '@gorhom/bottom-sheet';
 import {useMemo} from 'react';
-import {View, Text, Button} from 'react-native';
+import {View} from 'react-native';
 import PriceFilter from '../PriceFilter';
 import RatingFilter from '../RatingFilter';
+import ButtonFilter from '../ButtonFilter';
 import styles from './styles';
 
 export default function BottomSheetComponent({bottomSheetRef}) {
@@ -21,6 +22,7 @@ export default function BottomSheetComponent({bottomSheetRef}) {
       <View style={styles.contentContainer}>
         <PriceFilter />
         <RatingFilter />
+        <ButtonFilter />
       </View>
     </BottomSheet>
     // </View>
