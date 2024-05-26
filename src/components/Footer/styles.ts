@@ -30,14 +30,16 @@ const styles = StyleSheet.create({
     width: 228,
     height: 60,
     borderRadius: 16,
-    justifyContent: 'center',
-    alignItems: 'center',
   },
   price: {
     fontFamily: 'DM-Sans',
     fontSize: 24,
     fontWeight: 'bold',
     color: '#0E0C22',
+  },
+  contentStyle: {
+    width: '100%',
+    height: '100%',
   },
 });
 
