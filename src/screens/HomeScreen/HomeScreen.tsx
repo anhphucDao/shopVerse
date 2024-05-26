@@ -11,6 +11,7 @@ import {FlatList, ScrollView, Text, View} from 'react-native';
 import {HomeScreenProps} from './type';
 import styles from './styles';
 import {useRef} from 'react';
+import {Keyboard} from 'react-native';
 // import { useRef } from 'react';
 import BottomSheet from '@gorhom/bottom-sheet';
 
@@ -34,6 +35,7 @@ export default function HomeScreen({navigation}: HomeScreenProps) {
   //function to close bottom sheet
   const closeBottomSheet = () => {
     bottomSheetRef.current?.close();
+    Keyboard.dismiss();
   };
 
   //state to manage bottom sheet visibility
