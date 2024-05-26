@@ -2,6 +2,8 @@ import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {AppNavigator} from './src/navigation';
 import {MD3LightTheme, PaperProvider, configureFonts} from 'react-native-paper';
+import {GestureHandlerRootView} from 'react-native-gesture-handler';
+import {BottomSheetModalProvider} from '@gorhom/bottom-sheet';
 
 //font config
 // const fontConfig = {
@@ -59,10 +61,14 @@ const theme = {
 
 export default function App() {
   return (
-    <PaperProvider theme={theme}>
-      <NavigationContainer>
-        <AppNavigator />
-      </NavigationContainer>
-    </PaperProvider>
+    <GestureHandlerRootView style={{flex: 1}}>
+      <PaperProvider theme={theme}>
+        <NavigationContainer>
+          <BottomSheetModalProvider>
+            <AppNavigator />
+          </BottomSheetModalProvider>
+        </NavigationContainer>
+      </PaperProvider>
+    </GestureHandlerRootView>
   );
 }
