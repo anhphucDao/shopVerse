@@ -1,8 +1,9 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {ScrollView, View, Image, Text} from 'react-native';
 import DetailHeader from '../../components/DetailHeader';
 import Comment from '../../components/Comment';
 import Footer from '../../components/Footer';
+import AuthRequireDialog from '../../components/AuthRequireDialog';
 import styles from './styles';
 
 export default function DetailsScreen({navigation, route}) {
@@ -12,8 +13,12 @@ export default function DetailsScreen({navigation, route}) {
   console.log('Details Screen, route: ', route);
   console.log('Details Screen, itemId: ', itemId);
 
+  //state to manage dialog visibility
+  const [visible, setVisible] = useState(false);
+
   return (
     <View style={styles.screenContainer}>
+      <AuthRequireDialog visible={visible} setVisible={setVisible} />
       <DetailHeader navigation={navigation} />
       <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
         <View>
@@ -45,7 +50,7 @@ export default function DetailsScreen({navigation, route}) {
           </View>
         </View>
       </ScrollView>
-      <Footer />
+      <Footer setVisible={setVisible} />
     </View>
   );
 }
