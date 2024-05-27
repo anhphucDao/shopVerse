@@ -3,9 +3,18 @@ import {View, Text, Image} from 'react-native';
 import DismissKeyboard from '../../components/DismissKeyboard';
 import styles from './styles';
 import {Button, TextInput} from 'react-native-paper';
+import SnackBar from '../../components/SnackBar';
 
 export default function LoginScreen() {
   const [showPassword, setShowPassword] = useState(false);
+
+  //state to handle visibility of snackbar
+  const [isVisible, setIsVisible] = useState(false);
+
+  //function to toggle snack bar visibility
+  const toggleSnackBar = () => {
+    setIsVisible(!isVisible);
+  };
 
   const eyeIconHandler = () => {
     setShowPassword(prevState => !prevState);
@@ -14,6 +23,7 @@ export default function LoginScreen() {
   return (
     <DismissKeyboard>
       <View style={styles.container}>
+        <SnackBar isVisible={isVisible} setIsVisible={setIsVisible} />
         <Image
           source={require('../../assets/shopVerse.png')}
           style={styles.image}
@@ -58,7 +68,10 @@ export default function LoginScreen() {
           style={styles.button}
           contentStyle={styles.contentStyle}
           textColor="#FFF"
-          onPress={() => console.log('Pressed')}>
+          onPress={() => {
+            toggleSnackBar();
+            console.log('Pressed');
+          }}>
           Sign In
         </Button>
         <View style={styles.bottomTextContainer}>
