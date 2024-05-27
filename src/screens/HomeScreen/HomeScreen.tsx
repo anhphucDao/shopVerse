@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import ShoppingBag from '../../components/ShoppingBag';
 import Avatar from '../../components/Avatar';
 import Filter from '../../components/Filter';
@@ -7,6 +7,7 @@ import AssistiveChip from '../../components/AssistiveChip';
 import Product from '../../components/Product';
 import BottomSheetComponent from '../../components/BottomSheet';
 import DismissKeyboard from '../../components/DismissKeyboard';
+import ProfileDialog from '../../components/ProfileDialog';
 import {FlatList, ScrollView, Text, View} from 'react-native';
 import {HomeScreenProps} from './type';
 import styles from './styles';
@@ -39,16 +40,23 @@ export default function HomeScreen({navigation}: HomeScreenProps) {
   };
 
   //state to manage bottom sheet visibility
-  const [isOpen, setIsOpen] = React.useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+
+  //state to manage profile modal visibility
+  const [profileVisible, setProfileVisible] = useState(false);
 
   return (
     <>
       <View style={styles.screenContainer}>
+        <ProfileDialog
+          visible={profileVisible}
+          setVisible={setProfileVisible}
+        />
         <View style={styles.header}>
           <Text style={styles.headerTitle}>Discover Products</Text>
           <View style={styles.container}>
             <ShoppingBag />
-            <Avatar />
+            <Avatar setVisible={setProfileVisible} />
           </View>
         </View>
 
