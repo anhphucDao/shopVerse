@@ -16,15 +16,7 @@ import {useRef} from 'react';
 import {Keyboard} from 'react-native';
 import BottomSheet from '@gorhom/bottom-sheet';
 import {useQuery} from '@tanstack/react-query';
-import data from '../../data/productList';
 import {fetchProducts, fetchCategories} from '../../services/dataService';
-
-const categories = [
-  'electronics',
-  'jewelery',
-  "men's clothing",
-  "women's clothing",
-];
 
 export default function HomeScreen({navigation}: HomeScreenProps) {
   const bottomSheetRef = useRef<BottomSheet>(null);

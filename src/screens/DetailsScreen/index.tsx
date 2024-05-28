@@ -4,7 +4,10 @@ import DetailHeader from '../../components/DetailHeader';
 import Comment from '../../components/Comment';
 import Footer from '../../components/Footer';
 import AuthRequireDialog from '../../components/AuthRequireDialog';
+import Loader from '../../components/Loader';
+import {useQuery} from '@tanstack/react-query';
 import styles from './styles';
+import {fetchProductById} from '../../services/dataService';
 
 export default function DetailsScreen({navigation, route}) {
   //use this itemId to fetch data from the server
@@ -16,6 +19,15 @@ export default function DetailsScreen({navigation, route}) {
   //state to manage dialog visibility
   const [visible, setVisible] = useState(false);
 
+  const {isLoading, data} = useQuery({
+    queryKey: ['product', itemId],
+    queryFn: () => fetchProductById(itemId),
+  });
+
+  if (isLoading) {
+    return <Loader />;
+  }
+
   return (
     <View style={styles.screenContainer}>
       <AuthRequireDialog visible={visible} setVisible={setVisible} />
@@ -23,30 +35,12 @@ export default function DetailsScreen({navigation, route}) {
       <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
         <View>
           <View style={styles.imageContainer}>
-            <Image
-              source={require('../../assets/images/product/bag.png')}
-              style={styles.image}
-            />
+            <Image source={{uri: data?.image}} style={styles.image} />
           </View>
-          <Comment />
+          <Comment rating={data?.rating} />
           <View style={styles.textContainer}>
-            <Text style={styles.title}>
-              MBJ Women's Solid Short Sleeve Boat Neck V
-            </Text>
-            <Text style={styles.description}>
-              95% RAYON 5% SPANDEX, Made in USA or Imported, Do Not Bleach,
-              Lightweight fabric with great stretch for comfort, Ribbed on
-              sleeves and neckline / Double stitching on bottom hem 95% RAYON 5%
-              SPANDEX, Made in USA or Imported, Do Not Bleach, Lightweight
-              fabric with great stretch for comfort, Ribbed on sleeves and
-              neckline / Double stitching on bottom hem 95% RAYON 5% SPANDEX,
-              Made in USA or Imported, Do Not Bleach, Lightweight fabric with
-              great stretch for comfort, Ribbed on sleeves and neckline / Double
-              stitching on bottom hem 95% RAYON 5% SPANDEX, Made in USA or
-              Imported, Do Not Bleach, Lightweight fabric with great stretch for
-              comfort, Ribbed on sleeves and neckline / Double stitching on
-              bottom hem
-            </Text>
+            <Text style={styles.title}>{data?.title}</Text>
+            <Text style={styles.description}>{data?.description}</Text>
           </View>
         </View>
       </ScrollView>
