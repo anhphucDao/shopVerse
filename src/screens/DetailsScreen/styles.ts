@@ -1,9 +1,9 @@
-import {StyleSheet} from 'react-native';
+import {Platform, StyleSheet} from 'react-native';
 
 const styles = StyleSheet.create({
   screenContainer: {
     position: 'relative',
-    paddingTop: 108,
+    paddingTop: Platform.OS === 'ios' ? 108 : 64,
     paddingBottom: 96,
   },
 
