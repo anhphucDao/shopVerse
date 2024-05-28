@@ -3,13 +3,11 @@ import {Text} from 'react-native';
 import {Chip} from 'react-native-paper';
 import styles from './styles';
 
-export default function AssistiveChip({title}) {
+export default function AssistiveChip({title, onPress}) {
   return (
     <Chip
       style={styles.chip}
-      onPress={() => {
-        console.log('Chip pressed');
-      }}>
+      onPress={onPress}>
       <Text style={styles.chipText}>{title}</Text>
     </Chip>
   );

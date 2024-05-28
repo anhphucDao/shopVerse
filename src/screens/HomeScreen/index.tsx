@@ -44,6 +44,10 @@ export default function HomeScreen({navigation}: HomeScreenProps) {
   //state to manage profile modal visibility
   const [profileVisible, setProfileVisible] = useState(false);
 
+  const chipPressHandler = (category: string) => {
+    console.log('Chip Pressed: ', category);
+  };
+
   return (
     <>
       <View style={styles.screenContainer}>
@@ -76,7 +80,11 @@ export default function HomeScreen({navigation}: HomeScreenProps) {
           horizontal
           showsHorizontalScrollIndicator={false}>
           {categories.map((category, index) => (
-            <AssistiveChip key={index} title={category} />
+            <AssistiveChip
+              key={index}
+              title={category}
+              onPress={() => chipPressHandler(category)}
+            />
           ))}
         </ScrollView>
 
