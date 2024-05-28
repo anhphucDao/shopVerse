@@ -2,9 +2,7 @@ import {StyleSheet} from 'react-native';
 
 const styles = StyleSheet.create({
   container: {
-    // width: '100%',
     flexDirection: 'row',
-    // justifyContent: "",
     maxHeight: 48,
     alignItems: 'flex-start',
     gap: 20,
@@ -45,9 +43,6 @@ const styles = StyleSheet.create({
   },
   productContainer: {
     marginTop: 16,
-    // flexDirection: 'row',
-    // flexWrap: 'wrap',
-    // maxHeight: 1000,
   },
 });
 

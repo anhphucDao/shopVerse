@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
     width: '100%',
     borderBottomWidth: 1,
     paddingHorizontal: 24,
-    borderBottomColor: '#D9D9D9', // Change this to the color you want
+    borderBottomColor: '#D9D9D9',
   },
   title: {
     fontSize: 20,

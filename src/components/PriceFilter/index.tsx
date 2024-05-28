@@ -18,7 +18,6 @@ export default function PriceFilter() {
           <RadioButton.Android value="second" />
         </View>
         <View style={styles.inputContainer}>
-          {/* <DismissKeyboard> */}
           <TextInput
             placeholder="From $0"
             mode="flat"
@@ -29,10 +28,8 @@ export default function PriceFilter() {
             underlineColor="transparent"
             activeUnderlineColor="transparent"
           />
-          {/* </DismissKeyboard> */}
 
           <View style={styles.divider} />
-          {/* <DismissKeyboard> */}
           <TextInput
             placeholder="To $1000"
             mode="flat"
@@ -43,7 +40,6 @@ export default function PriceFilter() {
             underlineColor="transparent"
             activeUnderlineColor="transparent"
           />
-          {/* </DismissKeyboard> */}
         </View>
       </View>
     </View>

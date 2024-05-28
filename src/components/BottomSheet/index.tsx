@@ -15,8 +15,6 @@ export default function BottomSheetComponent({bottomSheetRef}) {
   const snapPoints = useMemo(() => ['60%', '70%'], []);
 
   return (
-    // <View style={styles.container}>
-
     <BottomSheet
       index={-1}
       snapPoints={snapPoints}
@@ -36,7 +34,5 @@ export default function BottomSheetComponent({bottomSheetRef}) {
         <ButtonFilter />
       </View>
     </BottomSheet>
-
-    // </View>
   );
 }

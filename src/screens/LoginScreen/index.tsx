@@ -28,8 +28,6 @@ export default function LoginScreen() {
           source={require('../../assets/shopVerse.png')}
           style={styles.image}
         />
-        {/* <TextInput label="Email" mode="outlined" style={styles.input} />
-      <TextInput label="Password" mode="outlined" style={styles.input} /> */}
         <View style={styles.inputContainerWrapper}>
           <View style={styles.inputContainer}>
             <Text style={styles.text}>Email</Text>

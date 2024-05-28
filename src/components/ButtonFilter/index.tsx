@@ -12,7 +12,6 @@ export default function ButtonFilter() {
         onPress={() => {
           console.log('Reset button pressed');
         }}
-        // rippleColor={'#0E0C22'}
         contentStyle={styles.contentStyle}>
         Reset
       </Button>

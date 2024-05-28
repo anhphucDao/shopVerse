@@ -1,7 +1,6 @@
 import React from 'react';
 import {Image, Text, View} from 'react-native';
 import styles from './styles';
-// import BottomSheet from '../../components/BottomSheet';
 export default function EmptyScreen({route}) {
   return (
     <View style={styles.container}>
@@ -14,6 +13,5 @@ export default function EmptyScreen({route}) {
         style={styles.image}
       />
     </View>
-    // <BottomSheet />
   );
 }

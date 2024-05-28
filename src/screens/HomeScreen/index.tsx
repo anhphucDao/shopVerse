@@ -13,7 +13,6 @@ import {HomeScreenProps} from './type';
 import styles from './styles';
 import {useRef} from 'react';
 import {Keyboard} from 'react-native';
-// import { useRef } from 'react';
 import BottomSheet from '@gorhom/bottom-sheet';
 
 import data from '../../data/productList';
@@ -72,9 +71,6 @@ export default function HomeScreen({navigation}: HomeScreenProps) {
             setIsOpen={setIsOpen}
           />
         </View>
-        {/* <View style={styles.searchBarContainer}>
-          <SearchBar />
-        </View> */}
         <ScrollView
           style={styles.assistiveChipContainer}
           horizontal
@@ -83,7 +79,7 @@ export default function HomeScreen({navigation}: HomeScreenProps) {
             <AssistiveChip key={index} title={category} />
           ))}
         </ScrollView>
-        {/* <View style={styles.productContainer}> */}
+
         <FlatList
           data={data}
           renderItem={({item}) => (
@@ -105,8 +101,6 @@ export default function HomeScreen({navigation}: HomeScreenProps) {
           refreshing={false}
           onRefresh={() => console.log('Refresh')}
         />
-        {/* </View> */}
-        {/* <BottomSheet /> */}
       </View>
       <BottomSheetComponent bottomSheetRef={bottomSheetRef} />
     </>

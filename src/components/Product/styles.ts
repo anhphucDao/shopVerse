@@ -18,7 +18,6 @@ const styles = StyleSheet.create({
     color: '#0E0C22',
     textAlign: 'center',
     maxHeight: 60,
-    // minHeight: 60,
     lineHeight: 20,
   },
   price: {

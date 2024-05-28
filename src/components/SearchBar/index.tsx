@@ -7,7 +7,6 @@ export default function SearchBar() {
   const [debouncedInputValue, setDebouncedInputValue] = React.useState('');
 
   const handleInputChange = (event: string) => {
-    // console.log('event', event);
     setSearchQuery(event);
   };
 

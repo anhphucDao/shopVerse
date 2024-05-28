@@ -15,9 +15,6 @@ const styles = StyleSheet.create({
   ratingContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    // alignSelf: 'flex-start',
-    // maxWidth: 62,
-    // rowGap: 12,
   },
   imageContainer: {
     flex: 1,
@@ -34,7 +31,6 @@ const styles = StyleSheet.create({
   chip: {
     backgroundColor: '#EBEEEF',
     borderRadius: 16,
-    // alignSelf: 'fl',
     
   },
   chipText: {

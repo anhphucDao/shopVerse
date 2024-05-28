@@ -12,8 +12,6 @@ const styles = StyleSheet.create({
     width: 156,
     height: 54,
     borderRadius: 8,
-    // justifyContent: 'center',
-    // alignItems: 'center',
   },
   applyLabel: {
     fontFamily: 'DM-Sans',
