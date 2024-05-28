@@ -7,3 +7,11 @@ async function fetchProducts(): Promise<Product[]> {
 
   return response.data;
 }
+
+async function fetchCategories(): Promise<string[]> {
+  const response = await axios.get<string[]>(API_ENDPOINTS.GET_CATEGORIES);
+
+  return response.data;
+}
+
+export {fetchProducts, fetchCategories};

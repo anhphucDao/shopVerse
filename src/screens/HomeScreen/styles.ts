@@ -44,6 +44,9 @@ const styles = StyleSheet.create({
   productContainer: {
     marginTop: 16,
   },
+  productsColumn: {
+    justifyContent: 'space-around',
+  },
 });
 
 export default styles;
