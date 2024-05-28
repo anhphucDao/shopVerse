@@ -4,6 +4,8 @@ import {AppNavigator} from './src/navigation';
 import {MD3LightTheme, PaperProvider, configureFonts} from 'react-native-paper';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import {BottomSheetModalProvider} from '@gorhom/bottom-sheet';
+import {enableScreens} from 'react-native-screens';
+
 import {
   QueryClient,
   QueryClientProvider,
@@ -33,6 +35,10 @@ const theme = {
 const queryClient = new QueryClient();
 
 export default function App() {
+  React.useEffect(() => {
+    enableScreens(false);
+  }, []);
+
   return (
     <QueryClientProvider client={queryClient}>
       <GestureHandlerRootView style={{flex: 1}}>
