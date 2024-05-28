@@ -56,9 +56,6 @@ export default function HomeScreen({navigation}: HomeScreenProps) {
     return <Loader />;
   }
 
-  console.log('Products: ', productsQuery.data);
-  console.log('Categories: ', categoriesQuery.data);
-
   return (
     <>
       <View style={styles.screenContainer}>

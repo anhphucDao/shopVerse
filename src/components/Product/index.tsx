@@ -4,11 +4,9 @@ import {Image, Pressable, Text, View} from 'react-native';
 import FastImage from 'react-native-fast-image';
 
 export default function Product({name, price, imageUrl, navigation, itemId}) {
-  console.log('Product ID: ', itemId);
   return (
     <Pressable
       onPress={() => {
-        console.log('Product Pressed');
         navigation.navigate('details', {
           itemId: itemId,
         });

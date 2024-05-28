@@ -13,10 +13,6 @@ import FastImage from 'react-native-fast-image';
 export default function DetailsScreen({navigation, route}) {
   //use this itemId to fetch data from the server
   const {itemId} = route.params;
-
-  console.log('Details Screen, route: ', route);
-  console.log('Details Screen, itemId: ', itemId);
-
   //state to manage dialog visibility
   const [visible, setVisible] = useState(false);
 
