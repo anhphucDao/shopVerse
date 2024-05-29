@@ -38,6 +38,66 @@ export default function HomeScreen({navigation}: HomeScreenProps) {
     Keyboard.dismiss();
   };
 
+  //function to apply sort and filter
+  const applySortAndFilter = () => {
+    //perform sorting and filtering on the UIState, through priceOrder and ratingFrom
+
+    let sortedAndFiltered: Array<ProductI> = [];
+
+    // if (UIState.length === 0) {
+    //   if (chipPressed && categoryProduct.data) {
+    //     sortedAndFiltered = [...categoryProduct.data];
+    //   } else if (productsQuery.data) {
+    //     sortedAndFiltered = [...productsQuery.data];
+    //   }
+    // } else {
+    //   sortedAndFiltered = [...UIState];
+    // }
+
+    //if both priceOrder and ratingFrom are empty, return
+    if (priceOrder === '' && ratingFrom === 0) {
+      return;
+    }
+
+    chipPressed
+      ? (sortedAndFiltered = [...(categoryProduct.data || [])])
+      : (sortedAndFiltered = [...(productsQuery.data || [])]);
+
+    // sort based on priceOrder
+    sortedAndFiltered.sort((a: ProductI, b: ProductI) => {
+      if (priceOrder === 'highestToLowest') {
+        return Number(b.price) - Number(a.price);
+      } else if (priceOrder === 'LowestToHighest') {
+        return Number(a.price) - Number(b.price);
+      } else {
+        return 0;
+      }
+    });
+
+    //filter based on ratingFrom
+    sortedAndFiltered = sortedAndFiltered.filter(
+      product => product.rating.rate >= ratingFrom,
+    );
+    //set the sorted and filtered products to UIState
+    setUIState(sortedAndFiltered);
+
+    closeBottomSheet();
+  };
+
+  //function to reset priceOrder and ratingFrom
+  const resetSortAndFilter = () => {
+    setPriceOrder('');
+    setRatingFrom(0);
+
+    //if the category is pressed, set the UIState to the categoryProduct.data
+
+    chipPressed
+      ? setUIState(categoryProduct.data || [])
+      : setUIState(productsQuery.data || []);
+
+    closeBottomSheet();
+  };
+
   //state to manage bottom sheet visibility
   const [isOpen, setIsOpen] = useState(false);
 
@@ -56,16 +116,23 @@ export default function HomeScreen({navigation}: HomeScreenProps) {
 
   //state to manage price sorting order
 
-  const [priceOrder, setPriceOrder] = useState('highestToLowest');
+  const [priceOrder, setPriceOrder] = useState('');
 
   //state to manage rating filter
 
   const [ratingFrom, setRatingFrom] = useState(0);
 
+  // //state to manage priceRange
+
+  // const [priceRange, setPriceRange] = useState({});
+
   const chipPressHandler = (category: string) => {
     console.log('Chip Pressed: ', category);
     // setChipPressed(true);
     // setCategoryName(category);
+
+    //reset filter and sort
+    resetSortAndFilter();
 
     //toggle chip press
     setChipPressed(!chipPressed);
@@ -243,6 +310,8 @@ export default function HomeScreen({navigation}: HomeScreenProps) {
         setPriceOrder={setPriceOrder}
         ratingFrom={ratingFrom}
         setRatingFrom={setRatingFrom}
+        applySortAndFilter={applySortAndFilter}
+        resetSortAndFilter={resetSortAndFilter}
       />
     </>
   );
