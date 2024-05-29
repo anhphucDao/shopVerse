@@ -9,4 +9,7 @@ export const API_ENDPOINTS = {
 
   //api to get all categories
   GET_CATEGORIES: `${BASE_URL}/products/categories`,
+
+  //api to get products by category
+  GET_PRODUCTS_BY_CATEGORY: `${BASE_URL}/products/category/`,
 };

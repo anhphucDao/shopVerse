@@ -22,4 +22,17 @@ async function fetchProductById(id: number): Promise<Product> {
   return response.data;
 }
 
-export {fetchProducts, fetchCategories, fetchProductById};
+async function fetchProductsByCategory(category: string): Promise<Product[]> {
+  const response = await axios.get<Product[]>(
+    `${API_ENDPOINTS.GET_PRODUCTS_BY_CATEGORY}${category}`,
+  );
+
+  return response.data;
+}
+
+export {
+  fetchProducts,
+  fetchCategories,
+  fetchProductById,
+  fetchProductsByCategory,
+};

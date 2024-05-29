@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import ShoppingBag from '../../components/ShoppingBag';
 import Avatar from '../../components/Avatar';
 import Filter from '../../components/Filter';
@@ -16,7 +16,12 @@ import {useRef} from 'react';
 import {Keyboard} from 'react-native';
 import BottomSheet from '@gorhom/bottom-sheet';
 import {useQuery} from '@tanstack/react-query';
-import {fetchProducts, fetchCategories} from '../../services/dataService';
+import {
+  fetchProducts,
+  fetchCategories,
+  fetchProductsByCategory,
+} from '../../services/dataService';
+import {Product as ProductI} from '../../types/data';
 
 export default function HomeScreen({navigation}: HomeScreenProps) {
   const bottomSheetRef = useRef<BottomSheet>(null);
@@ -38,8 +43,16 @@ export default function HomeScreen({navigation}: HomeScreenProps) {
   //state to manage profile modal visibility
   const [profileVisible, setProfileVisible] = useState(false);
 
+  //state to manage chip press
+  const [chipPressed, setChipPressed] = useState(false);
+
+  //state to manage chip category
+  const [categoryName, setCategoryName] = useState('');
+
   const chipPressHandler = (category: string) => {
     console.log('Chip Pressed: ', category);
+    setChipPressed(true);
+    setCategoryName(category);
   };
 
   const productsQuery = useQuery({
@@ -52,7 +65,37 @@ export default function HomeScreen({navigation}: HomeScreenProps) {
     queryFn: fetchCategories,
   });
 
-  if (productsQuery.isLoading || categoriesQuery.isLoading) {
+  const categoryProduct = useQuery({
+    queryKey: ['category', categoryName],
+    queryFn: () => fetchProductsByCategory(categoryName),
+    enabled: chipPressed,
+  });
+
+  //since API filter & sort is not implemented, we will use this state to manage UI state
+  const [UIState, setUIState] = useState<Array<ProductI>>(
+    productsQuery.data || [],
+  );
+
+  useEffect(() => {
+    setUIState(productsQuery.data || []);
+  }, [
+    productsQuery.data,
+    categoriesQuery.data,
+    productsQuery.isLoading,
+    categoriesQuery.isLoading,
+  ]);
+
+  //useEffect for chip press
+
+  useEffect(() => {
+    setUIState(categoryProduct.data || []);
+  }, [categoryName, chipPressed, categoryProduct.data]);
+
+  if (
+    productsQuery.isLoading ||
+    categoriesQuery.isLoading ||
+    categoryProduct.isLoading
+  ) {
     return <Loader />;
   }
 
@@ -92,13 +135,14 @@ export default function HomeScreen({navigation}: HomeScreenProps) {
               <AssistiveChip
                 key={index}
                 title={category}
+                categoryUI={categoryName}
                 onPress={() => chipPressHandler(category)}
               />
             ))}
         </ScrollView>
 
         <FlatList
-          data={productsQuery.data}
+          data={UIState}
           renderItem={({item}) => (
             <Product
               key={item.id}
