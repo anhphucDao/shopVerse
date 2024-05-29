@@ -8,21 +8,15 @@ import Product from '../../components/Product';
 import BottomSheetComponent from '../../components/BottomSheet';
 import DismissKeyboard from '../../components/DismissKeyboard';
 import ProfileDialog from '../../components/ProfileDialog';
+import Loader from '../../components/Loader';
 import {FlatList, ScrollView, Text, View} from 'react-native';
 import {HomeScreenProps} from './type';
 import styles from './styles';
 import {useRef} from 'react';
 import {Keyboard} from 'react-native';
 import BottomSheet from '@gorhom/bottom-sheet';
-
-import data from '../../data/productList';
-
-const categories = [
-  'electronics',
-  'jewelery',
-  "men's clothing",
-  "women's clothing",
-];
+import {useQuery} from '@tanstack/react-query';
+import {fetchProducts, fetchCategories} from '../../services/dataService';
 
 export default function HomeScreen({navigation}: HomeScreenProps) {
   const bottomSheetRef = useRef<BottomSheet>(null);
@@ -47,6 +41,20 @@ export default function HomeScreen({navigation}: HomeScreenProps) {
   const chipPressHandler = (category: string) => {
     console.log('Chip Pressed: ', category);
   };
+
+  const productsQuery = useQuery({
+    queryKey: ['products'],
+    queryFn: fetchProducts,
+  });
+
+  const categoriesQuery = useQuery({
+    queryKey: ['categories'],
+    queryFn: fetchCategories,
+  });
+
+  if (productsQuery.isLoading || categoriesQuery.isLoading) {
+    return <Loader />;
+  }
 
   return (
     <>
@@ -79,17 +87,18 @@ export default function HomeScreen({navigation}: HomeScreenProps) {
           style={styles.assistiveChipContainer}
           horizontal
           showsHorizontalScrollIndicator={false}>
-          {categories.map((category, index) => (
-            <AssistiveChip
-              key={index}
-              title={category}
-              onPress={() => chipPressHandler(category)}
-            />
-          ))}
+          {categoriesQuery.data &&
+            categoriesQuery.data.map((category, index) => (
+              <AssistiveChip
+                key={index}
+                title={category}
+                onPress={() => chipPressHandler(category)}
+              />
+            ))}
         </ScrollView>
 
         <FlatList
-          data={data}
+          data={productsQuery.data}
           renderItem={({item}) => (
             <Product
               key={item.id}
@@ -100,7 +109,7 @@ export default function HomeScreen({navigation}: HomeScreenProps) {
               itemId={item.id}
             />
           )}
-          columnWrapperStyle={{justifyContent: 'space-between'}}
+          columnWrapperStyle={styles.productsColumn}
           numColumns={2}
           keyExtractor={item => item.id.toString()}
           ItemSeparatorComponent={() => <View style={{height: 14}} />}

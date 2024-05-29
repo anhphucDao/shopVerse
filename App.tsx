@@ -4,40 +4,13 @@ import {AppNavigator} from './src/navigation';
 import {MD3LightTheme, PaperProvider, configureFonts} from 'react-native-paper';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import {BottomSheetModalProvider} from '@gorhom/bottom-sheet';
+import {enableScreens} from 'react-native-screens';
 
-//font config
-// const fontConfig = {
-//   default: {
-//     regular: {
-//       fontFamily: 'DMSans-Regular',
-//       fontWeight: 'normal',
-//     },
-//     medium: {
-//       fontFamily: 'DMSans-Medium',
-//       fontWeight: 'normal',
-//     },
-//     light: {
-//       fontFamily: 'DMSans-Light',
-//       fontWeight: 'normal',
-//     },
-//     thin: {
-//       fontFamily: 'DMSans-Thin',
-//       fontWeight: 'normal',
-//     },
-//     semiBold: {
-//       fontFamily: 'DMSans-SemiBold',
-//       fontWeight: 'normal',
-//     },
-//     bold: {
-//       fontFamily: 'DMSans-Bold',
-//       fontWeight: 'normal',
-//     },
-//     black: {
-//       fontFamily: 'DMSans-Black',
-//       fontWeight: 'normal',
-//     },
-//   },
-// };
+import {
+  QueryClient,
+  QueryClientProvider,
+  useQuery,
+} from '@tanstack/react-query';
 
 const fontConfig = {
   fontFamily: 'DMSans',
@@ -59,16 +32,24 @@ const theme = {
   fonts: configureFonts({config: fontConfig}),
 };
 
+const queryClient = new QueryClient();
+
 export default function App() {
+  React.useEffect(() => {
+    enableScreens(false);
+  }, []);
+
   return (
-    <GestureHandlerRootView style={{flex: 1}}>
-      <PaperProvider theme={theme}>
-        <NavigationContainer>
-          <BottomSheetModalProvider>
-            <AppNavigator />
-          </BottomSheetModalProvider>
-        </NavigationContainer>
-      </PaperProvider>
-    </GestureHandlerRootView>
+    <QueryClientProvider client={queryClient}>
+      <GestureHandlerRootView style={{flex: 1}}>
+        <PaperProvider theme={theme}>
+          <NavigationContainer>
+            <BottomSheetModalProvider>
+              <AppNavigator />
+            </BottomSheetModalProvider>
+          </NavigationContainer>
+        </PaperProvider>
+      </GestureHandlerRootView>
+    </QueryClientProvider>
   );
 }

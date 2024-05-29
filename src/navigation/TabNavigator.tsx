@@ -42,19 +42,8 @@ const screens = [
 const TabNavigator = () => {
   const theme = useTheme(); // Access the theme here
 
-  // console.log(theme);
   return (
     <Tab.Navigator
-      // screenOptions={{
-      //   headerShown: false,
-      //   tabBarStyle: {
-      //     flexDirection: 'row',
-      //     shadowColor: '#000',
-      //     shadowOpacity: 0.1,
-      //     shadowOffset: {width: 0, height: -1},
-      //     elevation: 10, // This is for Android
-      //   },
-      // }}
       screenOptions={({route}) => ({
         headerShown: false,
         tabBarStyle: {
@@ -66,15 +55,6 @@ const TabNavigator = () => {
           shadowOffset: {width: 0, height: -1},
           elevation: 10, // This is for Android
         },
-        // tabBarVisible: (route => {
-        //   if (route.name === 'Home') {
-        //     const routeName = getFocusedRouteNameFromRoute(route) ?? 'Home';
-        //     console.log('routeName from: ', routeName);
-        //     return routeName !== 'details';
-        //   }
-
-        //   return true;
-        // })(route),
       })}>
       {screens.map(screen => {
         return (

@@ -1,10 +1,10 @@
-import {StyleSheet} from 'react-native';
+import {Platform, StyleSheet} from 'react-native';
 
 const styles = StyleSheet.create({
   container: {
     position: 'absolute',
     width: '100%',
-    paddingTop: 52,
+    paddingTop: Platform.OS === 'ios' ? 52 : 8,
     top: 0,
     flexDirection: 'row',
     alignItems: 'center',
