@@ -9,6 +9,7 @@ import BottomSheetComponent from '../../components/BottomSheet';
 import DismissKeyboard from '../../components/DismissKeyboard';
 import ProfileDialog from '../../components/ProfileDialog';
 import Loader from '../../components/Loader';
+import Empty from '../../components/Empty';
 import {FlatList, ScrollView, Text, View} from 'react-native';
 import {HomeScreenProps} from './type';
 import styles from './styles';
@@ -49,10 +50,18 @@ export default function HomeScreen({navigation}: HomeScreenProps) {
   //state to manage chip category
   const [categoryName, setCategoryName] = useState('');
 
+  //state to manage input value
+  const [searchQuery, setSearchQuery] = useState('');
+  const [debouncedInputValue, setDebouncedInputValue] = useState('');
+
   const chipPressHandler = (category: string) => {
     console.log('Chip Pressed: ', category);
-    setChipPressed(true);
-    setCategoryName(category);
+    // setChipPressed(true);
+    // setCategoryName(category);
+
+    //toggle chip press
+    setChipPressed(!chipPressed);
+    category ? setCategoryName(category) : setCategoryName('');
   };
 
   const productsQuery = useQuery({
@@ -91,6 +100,55 @@ export default function HomeScreen({navigation}: HomeScreenProps) {
     setUIState(categoryProduct.data || []);
   }, [categoryName, chipPressed, categoryProduct.data]);
 
+  //useEffect to print UIState
+  useEffect(() => {
+    console.log('UIState: ', UIState);
+  }, [UIState]);
+
+  //useEffect to search product
+  useEffect(() => {
+    if (debouncedInputValue === '') {
+      chipPressed
+        ? setUIState(categoryProduct.data || [])
+        : setUIState(productsQuery.data || []);
+    } else {
+      const filteredProducts: Array<ProductI> = [];
+
+      if (chipPressed) {
+        categoryProduct.data?.forEach(product => {
+          if (
+            product.title
+              .toLowerCase()
+              .includes(debouncedInputValue.toLowerCase())
+          ) {
+            filteredProducts.push(product);
+          }
+        });
+      } else {
+        productsQuery.data?.forEach(product => {
+          if (
+            product.title
+              .toLowerCase()
+              .includes(debouncedInputValue.toLowerCase())
+          ) {
+            filteredProducts.push(product);
+          }
+        });
+      }
+      // console.log('categoryProduct status: ', categoryProduct.status);
+      // console.log('filteredProducts: ', filteredProducts);
+      // console.log('categoryProduct.data: in if', categoryProduct.data);
+      // console.log('debouncedInputValue: in if', debouncedInputValue);
+
+      setUIState(filteredProducts);
+    }
+  }, [
+    debouncedInputValue,
+    productsQuery.data,
+    categoryProduct.data,
+    chipPressed,
+  ]);
+
   if (
     productsQuery.isLoading ||
     categoriesQuery.isLoading ||
@@ -113,10 +171,14 @@ export default function HomeScreen({navigation}: HomeScreenProps) {
             <Avatar setVisible={setProfileVisible} />
           </View>
         </View>
-
         <View style={styles.discoverFilterContainer}>
           <DismissKeyboard>
-            <SearchBar />
+            <SearchBar
+              searchQuery={searchQuery}
+              setSearchQuery={setSearchQuery}
+              debouncedInputValue={debouncedInputValue}
+              setDebouncedInputValue={setDebouncedInputValue}
+            />
           </DismissKeyboard>
 
           <Filter
@@ -137,31 +199,35 @@ export default function HomeScreen({navigation}: HomeScreenProps) {
                 title={category}
                 categoryUI={categoryName}
                 onPress={() => chipPressHandler(category)}
+                chipPressed={chipPressed}
               />
             ))}
         </ScrollView>
-
-        <FlatList
-          data={UIState}
-          renderItem={({item}) => (
-            <Product
-              key={item.id}
-              name={item.title}
-              price={item.price}
-              imageUrl={item.image}
-              navigation={navigation}
-              itemId={item.id}
-            />
-          )}
-          columnWrapperStyle={styles.productsColumn}
-          numColumns={2}
-          keyExtractor={item => item.id.toString()}
-          ItemSeparatorComponent={() => <View style={{height: 14}} />}
-          style={styles.productContainer}
-          showsVerticalScrollIndicator={false}
-          refreshing={false}
-          onRefresh={() => console.log('Refresh')}
-        />
+        {UIState.length === 0 ? (
+          <Empty />
+        ) : (
+          <FlatList
+            data={UIState}
+            renderItem={({item}) => (
+              <Product
+                key={item.id}
+                name={item.title}
+                price={item.price}
+                imageUrl={item.image}
+                navigation={navigation}
+                itemId={item.id}
+              />
+            )}
+            columnWrapperStyle={styles.productsColumn}
+            numColumns={2}
+            keyExtractor={item => item.id.toString()}
+            ItemSeparatorComponent={() => <View style={{height: 14}} />}
+            style={styles.productContainer}
+            showsVerticalScrollIndicator={false}
+            refreshing={false}
+            onRefresh={() => console.log('Refresh')}
+          />
+        )}
       </View>
       <BottomSheetComponent bottomSheetRef={bottomSheetRef} />
     </>

@@ -40,6 +40,7 @@ const styles = StyleSheet.create({
   assistiveChipContainer: {
     marginTop: 12,
     minHeight: 32,
+    maxHeight: 32,
   },
   productContainer: {
     marginTop: 16,
