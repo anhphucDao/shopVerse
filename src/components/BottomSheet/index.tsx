@@ -17,6 +17,8 @@ export default function BottomSheetComponent({
   setRatingFrom,
   applySortAndFilter,
   resetSortAndFilter,
+  setPriceRange,
+  isReset
 }) {
   //use this useEffect to initially hide the bottom sheet
 
@@ -35,7 +37,12 @@ export default function BottomSheetComponent({
       }}>
       <View style={styles.contentContainer}>
         <DismissKeyboard>
-          <PriceFilter priceOrder={priceOrder} setPriceOrder={setPriceOrder} />
+          <PriceFilter
+            priceOrder={priceOrder}
+            setPriceOrder={setPriceOrder}
+            setPriceRange={setPriceRange}
+            isReset={isReset}
+          />
         </DismissKeyboard>
 
         <RatingFilter ratingFrom={ratingFrom} setRatingFrom={setRatingFrom} />

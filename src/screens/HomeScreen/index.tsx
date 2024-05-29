@@ -74,6 +74,15 @@ export default function HomeScreen({navigation}: HomeScreenProps) {
       }
     });
 
+    //filter based on priceRange
+    if (priceRange.from !== '' && priceRange.to !== '') {
+      sortedAndFiltered = sortedAndFiltered.filter(
+        product =>
+          Number(product.price) >= Number(priceRange.from) &&
+          Number(product.price) <= Number(priceRange.to),
+      );
+    }
+
     //filter based on ratingFrom
     sortedAndFiltered = sortedAndFiltered.filter(
       product => product.rating.rate >= ratingFrom,
@@ -89,13 +98,25 @@ export default function HomeScreen({navigation}: HomeScreenProps) {
     setPriceOrder('');
     setRatingFrom(0);
 
-    //if the category is pressed, set the UIState to the categoryProduct.data
+    //reset priceRange
+    setPriceRange({
+      from: '',
+      to: '',
+    });
 
+    //if the category is pressed, set the UIState to the categoryProduct.data
     chipPressed
       ? setUIState(categoryProduct.data || [])
       : setUIState(productsQuery.data || []);
 
     closeBottomSheet();
+
+    setIsReset(true);
+
+    // Delay the second setIsReset call
+    setTimeout(() => {
+      setIsReset(false);
+    }, 0);
   };
 
   //state to manage bottom sheet visibility
@@ -124,7 +145,12 @@ export default function HomeScreen({navigation}: HomeScreenProps) {
 
   // //state to manage priceRange
 
-  // const [priceRange, setPriceRange] = useState({});
+  const [priceRange, setPriceRange] = useState({
+    from: '',
+    to: '',
+  });
+
+  const [isReset, setIsReset] = useState(false);
 
   const chipPressHandler = (category: string) => {
     console.log('Chip Pressed: ', category);
@@ -186,6 +212,8 @@ export default function HomeScreen({navigation}: HomeScreenProps) {
       chipPressed
         ? setUIState(categoryProduct.data || [])
         : setUIState(productsQuery.data || []);
+
+      resetSortAndFilter();
     } else {
       const filteredProducts: Array<ProductI> = [];
 
@@ -312,6 +340,8 @@ export default function HomeScreen({navigation}: HomeScreenProps) {
         setRatingFrom={setRatingFrom}
         applySortAndFilter={applySortAndFilter}
         resetSortAndFilter={resetSortAndFilter}
+        setPriceRange={setPriceRange}
+        isReset={isReset}
       />
     </>
   );
