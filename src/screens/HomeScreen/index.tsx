@@ -54,6 +54,14 @@ export default function HomeScreen({navigation}: HomeScreenProps) {
   const [searchQuery, setSearchQuery] = useState('');
   const [debouncedInputValue, setDebouncedInputValue] = useState('');
 
+  //state to manage price sorting order
+
+  const [priceOrder, setPriceOrder] = useState('highestToLowest');
+
+  //state to manage rating filter
+
+  const [ratingFrom, setRatingFrom] = useState(0);
+
   const chipPressHandler = (category: string) => {
     console.log('Chip Pressed: ', category);
     // setChipPressed(true);
@@ -229,7 +237,13 @@ export default function HomeScreen({navigation}: HomeScreenProps) {
           />
         )}
       </View>
-      <BottomSheetComponent bottomSheetRef={bottomSheetRef} />
+      <BottomSheetComponent
+        bottomSheetRef={bottomSheetRef}
+        priceOrder={priceOrder}
+        setPriceOrder={setPriceOrder}
+        ratingFrom={ratingFrom}
+        setRatingFrom={setRatingFrom}
+      />
     </>
   );
 }

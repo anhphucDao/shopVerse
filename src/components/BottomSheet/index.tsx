@@ -9,7 +9,13 @@ import styles from './styles';
 import {Keyboard} from 'react-native';
 import DismissKeyboard from '../DismissKeyboard';
 
-export default function BottomSheetComponent({bottomSheetRef}) {
+export default function BottomSheetComponent({
+  bottomSheetRef,
+  priceOrder,
+  setPriceOrder,
+  ratingFrom,
+  setRatingFrom,
+}) {
   //use this useEffect to initially hide the bottom sheet
 
   const snapPoints = useMemo(() => ['60%', '70%'], []);
@@ -27,10 +33,10 @@ export default function BottomSheetComponent({bottomSheetRef}) {
       }}>
       <View style={styles.contentContainer}>
         <DismissKeyboard>
-          <PriceFilter />
+          <PriceFilter priceOrder={priceOrder} setPriceOrder={setPriceOrder} />
         </DismissKeyboard>
 
-        <RatingFilter />
+        <RatingFilter ratingFrom={ratingFrom} setRatingFrom={setRatingFrom} />
         <ButtonFilter />
       </View>
     </BottomSheet>
