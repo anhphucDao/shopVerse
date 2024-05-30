@@ -271,7 +271,7 @@ export default function HomeScreen({navigation}: HomeScreenProps) {
         <View style={styles.header}>
           <Text style={styles.headerTitle}>Discover Products</Text>
           <View style={styles.container}>
-            <ShoppingBag />
+            <ShoppingBag navigation={navigation} />
             <Avatar setVisible={setProfileVisible} />
           </View>
         </View>

@@ -27,6 +27,11 @@ export default function ProfileDialog({visible, setVisible, navigation}) {
     }
   };
 
+  const onSettingsButtonPress = () => {
+    setVisible(false);
+    navigation.navigate('Profile');
+  };
+
   return (
     <Portal>
       <Modal
@@ -56,7 +61,7 @@ export default function ProfileDialog({visible, setVisible, navigation}) {
             textColor="#676F81"
             contentStyle={styles.contentStyle}
             onPress={() => {
-              console.log('Settings pressed');
+              onSettingsButtonPress();
             }}>
             <Text style={styles.text}>Settings</Text>
           </Button>
