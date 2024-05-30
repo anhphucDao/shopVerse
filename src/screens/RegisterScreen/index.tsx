@@ -4,6 +4,7 @@ import DismissKeyboard from '../../components/DismissKeyboard';
 import styles from './styles';
 import {Button, TextInput} from 'react-native-paper';
 import SnackBar from '../../components/SnackBar';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const emailError = 'Email is not valid';
 const passwordError = 'Password requires 6 characters and a special character';
@@ -38,6 +39,116 @@ export default function RegisterScreen({navigation}) {
 
   const [isCountdownRunning, setIsCountdownRunning] = useState(false);
 
+  //state to catch error state when connnect to async storage
+  const [isError, setIsError] = useState(false);
+
+  //function to set account into async storage
+  const storeAccount = async () => {
+    try {
+      const account = {
+        email: debounceEmail,
+        password: debouncePassword,
+        // ... other account data ...
+      };
+
+      const previousData = await getFromStorage();
+
+      if (previousData.length === 0 && message === 'Error register account') {
+        return;
+      }
+      //check if there is already an account in async storage
+      console.log(
+        'previousData.some:',
+        previousData.some(account => account.email === debounceEmail),
+      );
+
+      //check if there is already an account in async storage
+      const accountExists = previousData.some(
+        account => account.email === debounceEmail,
+      );
+
+      console.log('accountExists:', accountExists);
+
+      if (accountExists) {
+        // setIsExisted(true);
+        console.log('Account already exists');
+        setMessage('Account already exists');
+        return accountExists;
+      }
+
+      if (previousData.length > 0) {
+        const updatedData = [...previousData, account];
+        await AsyncStorage.setItem('account', JSON.stringify(updatedData));
+      } else {
+        await AsyncStorage.setItem('account', JSON.stringify([account]));
+      }
+
+      return false;
+    } catch (e) {
+      // saving error
+      setIsError(true);
+      setMessage('Error register account');
+    }
+  };
+
+  //function to check if account already exists in async storage
+  //   const checkAccount = async () => {
+  //     try {
+  //       const value = await AsyncStorage.getItem('account');
+  //       if (value !== null) {
+  //         // value previously stored
+  //         //loop through the account data, to check if the email already exists
+  //         const accountData = JSON.parse(value);
+
+  //         return accountData.some(account => account.email === debounceEmail);
+  //       }
+
+  //       return false;
+  //     } catch (e) {
+  //       // error reading value
+
+  //       setMessage('Error register account');
+  //       return false;
+  //     }
+  //   };
+
+  //function to delete accountData in async storage
+
+  const deleteAccount = async () => {
+    try {
+      await AsyncStorage.removeItem('account');
+    } catch (e) {
+      // remove error
+      console.log('Error deleting account');
+    }
+  };
+
+  //function to get all items in async storage
+  const getFromStorage = async () => {
+    try {
+      const value = await AsyncStorage.getItem('account');
+
+      if (value !== null) {
+        // value previously stored
+        //loop through the account data, to check if the email already exists
+        const accountData = JSON.parse(value);
+
+        console.log('accountData:', accountData);
+
+        return accountData;
+      } else {
+        console.log('Not found');
+        return [];
+      }
+    } catch (e) {
+      // error reading value
+      console.log('Error reading value');
+      setIsError(true);
+      setMessage('Error register account');
+      return [];
+    }
+  };
+
   //function to toggle snack bar visibility
   const toggleSnackBar = () => {
     setIsVisible(!isVisible);
@@ -45,6 +156,7 @@ export default function RegisterScreen({navigation}) {
 
   const eyeIconHandler = () => {
     setShowPassword(prevState => !prevState);
+    // await deleteAccount();
   };
 
   const alreadySignUp = () => {
@@ -80,7 +192,7 @@ export default function RegisterScreen({navigation}) {
     return true;
   };
 
-  const onSignUpPress = () => {
+  const onSignUpPress = async () => {
     if (!validateEmail(debounceEmail) || !validatePassword(debouncePassword)) {
       if (
         !validateEmail(debounceEmail) &&
@@ -95,10 +207,18 @@ export default function RegisterScreen({navigation}) {
 
       setIsVisible(true);
     } else {
+      const accountExists = await storeAccount();
+
+      if (accountExists || isError) {
+        console.log('code ran here');
+
+        setIsVisible(true);
+        return;
+      }
       setMessage(createAccountMessage);
       setIsVisible(true);
-
       setIsCountdownRunning(true);
+
       // Start the countdown
       let seconds = 3;
       setCountdown(seconds);
