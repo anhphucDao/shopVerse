@@ -4,6 +4,7 @@ import DismissKeyboard from '../../components/DismissKeyboard';
 import styles from './styles';
 import {Button, TextInput} from 'react-native-paper';
 import SnackBar from '../../components/SnackBar';
+import {Pressable} from 'react-native';
 
 const unableToLoginMessage =
   'Unable to login \nPlease check your email or password again';
@@ -21,6 +22,10 @@ export default function LoginScreen({navigation}) {
 
   const eyeIconHandler = () => {
     setShowPassword(prevState => !prevState);
+  };
+
+  const signUpPress = () => {
+    navigation.navigate('Register');
   };
 
   return (
@@ -81,7 +86,9 @@ export default function LoginScreen({navigation}) {
         </Button>
         <View style={styles.bottomTextContainer}>
           <Text style={styles.forgotPassword}>Forgot Password?</Text>
-          <Text style={styles.signUp}>Sign Up</Text>
+          <Pressable onPress={() => signUpPress()}>
+            <Text style={styles.signUp}>Sign Up</Text>
+          </Pressable>
         </View>
       </View>
     </DismissKeyboard>

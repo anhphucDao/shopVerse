@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
     fontFamily: 'DM-Sans',
     fontSize: 12,
     fontWeight: 'medium',
-    lineHeight: 16,
+    lineHeight: 20,
   },
   textUnder: {
     marginTop: 4,

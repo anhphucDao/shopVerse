@@ -68,7 +68,24 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'medium',
     color: '#0E0C22',
-    // textDecorationLine: 'underline',
+    textDecorationLine: 'underline',
+  },
+
+  disableButton: {
+    width: '100%',
+    height: 50,
+    backgroundColor: '#EBEEEF',
+    borderRadius: 10,
+    marginTop: 40,
+  },
+
+  disableContentStyle: {
+    width: '100%',
+    height: '100%',
+    fontFamily: 'DM-Sans',
+    fontSize: 20,
+    fontWeight: 'medium',
+    color: '#838589',
   },
 });
 
