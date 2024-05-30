@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {View, Text} from 'react-native';
 import {Portal, Snackbar} from 'react-native-paper';
 import styles from './styles';
@@ -7,8 +7,20 @@ export default function SnackBar({
   isVisible,
   setIsVisible,
   message,
-  countdown,
+  countdown = 0,
 }) {
+  useEffect(() => {
+    let timer: NodeJS.Timeout | undefined;
+    if (isVisible) {
+      timer = setTimeout(() => {
+        setIsVisible(false);
+      }, 5000);
+    }
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [isVisible, setIsVisible]);
+
   return (
     <Portal>
       <Snackbar

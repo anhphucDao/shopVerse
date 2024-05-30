@@ -14,7 +14,7 @@ export default function ProfileDialog({visible, setVisible}) {
         visible={visible}
         onDismiss={onDismissHandler}
         contentContainerStyle={styles.container}>
-        <View style={styles.upperView}></View>
+        <View style={styles.upperView} />
         <Image
           source={require('../../assets/images/profileLarge.png')}
           style={styles.image}
@@ -23,7 +23,8 @@ export default function ProfileDialog({visible, setVisible}) {
           icon="close"
           iconColor="white"
           style={styles.icon}
-          onPress={() => setVisible(false)}></IconButton>
+          onPress={() => setVisible(false)}
+        />
         <View style={styles.textContainer}>
           <Text style={styles.name}>John Doe</Text>
           <Text style={styles.phone}>(01)324383</Text>
