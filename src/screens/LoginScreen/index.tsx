@@ -5,6 +5,9 @@ import styles from './styles';
 import {Button, TextInput} from 'react-native-paper';
 import SnackBar from '../../components/SnackBar';
 
+const unableToLoginMessage =
+  'Unable to login \nPlease check your email or password again';
+
 export default function LoginScreen() {
   const [showPassword, setShowPassword] = useState(false);
 
@@ -23,7 +26,11 @@ export default function LoginScreen() {
   return (
     <DismissKeyboard>
       <View style={styles.container}>
-        <SnackBar isVisible={isVisible} setIsVisible={setIsVisible} />
+        <SnackBar
+          isVisible={isVisible}
+          setIsVisible={setIsVisible}
+          message={unableToLoginMessage}
+        />
         <Image
           source={require('../../assets/shopVerse.png')}
           style={styles.image}
