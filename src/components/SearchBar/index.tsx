@@ -2,10 +2,12 @@ import React, {useEffect} from 'react';
 import {Searchbar} from 'react-native-paper';
 import styles from './styles';
 
-export default function SearchBar() {
-  const [searchQuery, setSearchQuery] = React.useState('');
-  const [debouncedInputValue, setDebouncedInputValue] = React.useState('');
-
+export default function SearchBar({
+  searchQuery,
+  setSearchQuery,
+  debouncedInputValue,
+  setDebouncedInputValue,
+}) {
   const handleInputChange = (event: string) => {
     setSearchQuery(event);
   };
@@ -18,7 +20,12 @@ export default function SearchBar() {
     console.log('debouncedInputValue', debouncedInputValue);
 
     return () => clearTimeout(timeoutId);
-  }, [searchQuery, debouncedInputValue]);
+  }, [
+    searchQuery,
+    debouncedInputValue,
+    setDebouncedInputValue,
+    setSearchQuery,
+  ]);
 
   return (
     <Searchbar

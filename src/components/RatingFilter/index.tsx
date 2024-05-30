@@ -5,7 +5,12 @@ import {Chip} from 'react-native-paper';
 
 const ratingFilter = [5, 4, 3];
 
-export default function RatingFilter() {
+export default function RatingFilter({ratingFrom, setRatingFrom}) {
+  const chipPressHandler = (rating: number) => {
+    // console.log('Rating Filter Pressed, ratingFrom', ratingFrom);
+    rating === ratingFrom ? setRatingFrom(0) : setRatingFrom(rating);
+  };
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Rating</Text>
@@ -13,12 +18,16 @@ export default function RatingFilter() {
         {ratingFilter.map(rating => {
           return (
             <Chip
-              style={styles.chip}
-              textStyle={styles.chipText}
+              style={ratingFrom === rating ? styles.chipSelected : styles.chip}
+              textStyle={
+                ratingFrom === rating
+                  ? styles.chipTextSelected
+                  : styles.chipText
+              }
               key={rating}
-              onPress={() => {
-                console.log('Rating Filter Pressed');
-              }}>
+              selected={ratingFrom === rating}
+              showSelectedCheck={false}
+              onPress={() => chipPressHandler(rating)}>
               {`From ${rating} stars`}
             </Chip>
           );
