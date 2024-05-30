@@ -59,21 +59,16 @@ const styles = StyleSheet.create({
   bottomTextContainer: {
     flexDirection: 'row',
     marginTop: 32,
-    justifyContent: 'space-between',
+
+    justifyContent: 'flex-end',
     width: '100%',
   },
-  forgotPassword: {
+  alreadySignUp: {
     fontFamily: 'DM-Sans',
     fontSize: 16,
     fontWeight: 'medium',
     color: '#0E0C22',
-    textDecorationLine: 'underline',
-  },
-  signUp: {
-    fontFamily: 'DM-Sans',
-    fontSize: 16,
-    fontWeight: 'medium',
-    color: '#0E0C22',
+    // textDecorationLine: 'underline',
   },
 });
 

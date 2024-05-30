@@ -82,8 +82,7 @@ export default function RegisterScreen() {
           Sign Up
         </Button>
         <View style={styles.bottomTextContainer}>
-          <Text style={styles.forgotPassword}>Already have an account?</Text>
-          <Text style={styles.signUp}>Sign In</Text>
+          <Text style={styles.alreadySignUp}>Already have an account?</Text>
         </View>
       </View>
     </DismissKeyboard>
