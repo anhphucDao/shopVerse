@@ -266,6 +266,7 @@ export default function HomeScreen({navigation}: HomeScreenProps) {
         <ProfileDialog
           visible={profileVisible}
           setVisible={setProfileVisible}
+          navigation={navigation}
         />
         <View style={styles.header}>
           <Text style={styles.headerTitle}>Discover Products</Text>

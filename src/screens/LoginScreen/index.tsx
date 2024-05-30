@@ -150,6 +150,11 @@ export default function LoginScreen({navigation}) {
 
       if (isEmailAndPasswordMatch) {
         setIsAuth(true);
+
+        //clear the email and password input
+        setEmail('');
+        setPassword('');
+
         navigation.navigate('Home');
       } else {
         setMessage(unableToLoginMessage);
