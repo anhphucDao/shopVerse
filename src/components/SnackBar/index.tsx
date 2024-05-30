@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {View, Text} from 'react-native';
+import {Text} from 'react-native';
 import {Portal, Snackbar} from 'react-native-paper';
 import styles from './styles';
 
