@@ -8,7 +8,7 @@ import SnackBar from '../../components/SnackBar';
 const unableToLoginMessage =
   'Unable to login \nPlease check your email or password again';
 
-export default function LoginScreen() {
+export default function LoginScreen({navigation}) {
   const [showPassword, setShowPassword] = useState(false);
 
   //state to handle visibility of snackbar

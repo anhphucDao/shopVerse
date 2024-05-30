@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View, Text, Image} from 'react-native';
+import {View, Text, Image, Pressable} from 'react-native';
 import DismissKeyboard from '../../components/DismissKeyboard';
 import styles from './styles';
 import {Button, TextInput} from 'react-native-paper';
@@ -10,7 +10,7 @@ const unableToLoginMessage =
 
 const createAccountMessage = 'Account created successfully';
 
-export default function RegisterScreen() {
+export default function RegisterScreen({navigation}) {
   const [showPassword, setShowPassword] = useState(false);
 
   //state to handle visibility of snackbar
@@ -23,6 +23,10 @@ export default function RegisterScreen() {
 
   const eyeIconHandler = () => {
     setShowPassword(prevState => !prevState);
+  };
+
+  const alreadySignUp = () => {
+    navigation.navigate('Login');
   };
 
   return (
@@ -82,7 +86,9 @@ export default function RegisterScreen() {
           Sign Up
         </Button>
         <View style={styles.bottomTextContainer}>
-          <Text style={styles.alreadySignUp}>Already have an account?</Text>
+          <Pressable onPress={() => alreadySignUp()}>
+            <Text style={styles.alreadySignUp}>Already have an account?</Text>
+          </Pressable>
         </View>
       </View>
     </DismissKeyboard>
