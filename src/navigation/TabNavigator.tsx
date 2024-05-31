@@ -48,7 +48,10 @@ const TabNavigator = () => {
         headerShown: false,
         tabBarStyle: {
           display:
-            getFocusedRouteNameFromRoute(route) === 'details' ? 'none' : 'flex',
+            getFocusedRouteNameFromRoute(route) === 'details' ||
+            getFocusedRouteNameFromRoute(route) === 'search'
+              ? 'none'
+              : 'flex',
           flexDirection: 'row',
           shadowColor: '#000',
           shadowOpacity: 0.1,

@@ -2,6 +2,7 @@ import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import HomeScreen from '../screens/HomeScreen/index';
 import DetailsScreen from '../screens/DetailsScreen/index';
+import SearchScreen from '../screens/SearchScreen/index';
 
 const HomeStack = createNativeStackNavigator();
 
@@ -13,6 +14,7 @@ const HomeNavigator = () => {
       }}>
       <HomeStack.Screen name="home" component={HomeScreen} />
       <HomeStack.Screen name="details" component={DetailsScreen} />
+      <HomeStack.Screen name="search" component={SearchScreen} />
     </HomeStack.Navigator>
   );
 };

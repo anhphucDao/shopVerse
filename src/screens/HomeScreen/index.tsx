@@ -1,4 +1,10 @@
-import React, {useEffect, useState} from 'react';
+import React, {
+  Dispatch,
+  SetStateAction,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react';
 import ShoppingBag from '../../components/ShoppingBag';
 import Avatar from '../../components/Avatar';
 import Filter from '../../components/Filter';
@@ -10,7 +16,15 @@ import DismissKeyboard from '../../components/DismissKeyboard';
 import ProfileDialog from '../../components/ProfileDialog';
 import Loader from '../../components/Loader';
 import Empty from '../../components/Empty';
-import {FlatList, ScrollView, Text, View} from 'react-native';
+import SuggestionBox from '../../components/SuggestionBox';
+import {
+  FlatList,
+  LayoutChangeEvent,
+  Platform,
+  ScrollView,
+  Text,
+  View,
+} from 'react-native';
 import {HomeScreenProps} from './type';
 import styles from './styles';
 import {useRef} from 'react';
@@ -152,6 +166,58 @@ export default function HomeScreen({navigation}: HomeScreenProps) {
 
   const [isReset, setIsReset] = useState(false);
 
+  // //state to manage size of search bar
+
+  // const [searchBarSize, setSearchBarSize] = useState({
+  //   width: 0,
+  //   height: 0,
+  // });
+
+  // //state to manage size of header container
+  // const [headerSize, setHeaderSize] = useState({
+  //   width: 0,
+  //   height: 0,
+  // });
+
+  // //state to manage visibility of suggestion box
+  // const [suggestionBoxVisible, setSuggestionBoxVisible] = useState(false);
+
+  // //function to handle onLayout event
+  // const handleLayout = (
+  //   event: LayoutChangeEvent,
+  //   setState: Dispatch<SetStateAction<{width: number; height: number}>>,
+  // ) => {
+  //   const {width, height} = event.nativeEvent.layout;
+  //   setState({width, height});
+  // };
+
+  // //function to calculate the position for suggestion box
+  // const suggestionBoxPosition = useMemo(() => {
+  //   //padding top of screen container
+  //   const paddingTop = Platform.OS === 'ios' ? 60 : 24;
+  //   const marginTopSearchBar = 16;
+
+  //   //position of suggestion box
+  //   const top =
+  //     headerSize.height +
+  //     searchBarSize.height +
+  //     paddingTop +
+  //     marginTopSearchBar;
+
+  //   //left will equal to horizontal padding of screen container
+  //   const left = 24;
+
+  //   return {top, left};
+  // }, [searchBarSize, headerSize]);
+
+  // useEffect(() => {
+  //   console.log('SearchBarSize: ', searchBarSize);
+  // }, [searchBarSize]);
+
+  // useEffect(() => {
+  //   console.log('HeaderSize: ', headerSize);
+  // }, [headerSize]);
+
   const chipPressHandler = (category: string) => {
     console.log('Chip Pressed: ', category);
     // setChipPressed(true);
@@ -263,11 +329,19 @@ export default function HomeScreen({navigation}: HomeScreenProps) {
   return (
     <>
       <View style={styles.screenContainer}>
+        {/* <SuggestionBox
+          position={suggestionBoxPosition}
+          width={searchBarSize.width}
+          suggestionBoxVisible={suggestionBoxVisible}
+        /> */}
         <ProfileDialog
           visible={profileVisible}
           setVisible={setProfileVisible}
         />
-        <View style={styles.header}>
+        <View
+          style={styles.header}
+          // onLayout={e => handleLayout(e, setHeaderSize)}
+        >
           <Text style={styles.headerTitle}>Discover Products</Text>
           <View style={styles.container}>
             <ShoppingBag />
@@ -276,12 +350,19 @@ export default function HomeScreen({navigation}: HomeScreenProps) {
         </View>
         <View style={styles.discoverFilterContainer}>
           <DismissKeyboard>
-            <SearchBar
-              searchQuery={searchQuery}
-              setSearchQuery={setSearchQuery}
-              debouncedInputValue={debouncedInputValue}
-              setDebouncedInputValue={setDebouncedInputValue}
-            />
+            <View
+              style={styles.searchBarWrapper}
+              // onLayout={e => handleLayout(e, setSearchBarSize)}
+            >
+              <SearchBar
+                searchQuery={searchQuery}
+                setSearchQuery={setSearchQuery}
+                debouncedInputValue={debouncedInputValue}
+                setDebouncedInputValue={setDebouncedInputValue}
+                // setSuggestionBoxVisible={setSuggestionBoxVisible}
+                navigation={navigation}
+              />
+            </View>
           </DismissKeyboard>
 
           <Filter

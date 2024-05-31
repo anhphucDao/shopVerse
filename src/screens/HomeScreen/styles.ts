@@ -20,6 +20,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 24,
     paddingTop: Platform.OS === 'ios' ? 60 : 24,
     backgroundColor: '#fff',
+    // position: 'relative',
   },
   discoverFilterContainer: {
     flexDirection: 'row',
@@ -49,6 +50,10 @@ const styles = StyleSheet.create({
   },
   productsColumn: {
     justifyContent: 'space-between',
+  },
+
+  searchBarWrapper: {
+    flex: 1,
   },
 });
 
