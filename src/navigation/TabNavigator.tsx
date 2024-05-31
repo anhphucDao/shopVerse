@@ -9,7 +9,7 @@ import {useTheme} from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {Text} from 'react-native';
 import {getFocusedRouteNameFromRoute} from '@react-navigation/native';
-
+import {Platform} from 'react-native';
 const Tab = createBottomTabNavigator();
 
 const screens = [
@@ -54,6 +54,11 @@ const TabNavigator = () => {
           shadowOpacity: 0.1,
           shadowOffset: {width: 0, height: -1},
           elevation: 10, // This is for Android
+          ...(Platform.OS === 'android' && {
+            height: 60,
+            paddingBottom: 10,
+            paddingTop: 10,
+          }),
         },
       })}>
       {screens.map(screen => {
