@@ -324,7 +324,7 @@ export default function HomeScreen({navigation}: HomeScreenProps) {
             columnWrapperStyle={styles.productsColumn}
             numColumns={2}
             keyExtractor={item => item.id.toString()}
-            ItemSeparatorComponent={() => <View style={{height: 14}} />}
+            ItemSeparatorComponent={() => <View style={{height: 6}} />}
             style={styles.productContainer}
             showsVerticalScrollIndicator={false}
             refreshing={false}

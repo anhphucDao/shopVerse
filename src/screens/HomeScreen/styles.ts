@@ -44,9 +44,11 @@ const styles = StyleSheet.create({
   },
   productContainer: {
     marginTop: 16,
+    paddingHorizontal: Platform.OS === 'ios' ? 4 : 14,
+    maxWidth: 394,
   },
   productsColumn: {
-    justifyContent: 'space-around',
+    justifyContent: 'space-between',
   },
 });
 
