@@ -3,14 +3,14 @@ import {View, Text} from 'react-native';
 import {Button} from 'react-native-paper';
 import styles from './styles';
 
-export default function Footer({setVisible}) {
+export default function Footer({setVisible, price}) {
   const handlePress = () => {
     setVisible(true);
   };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.price}>$9.85</Text>
+      <Text style={styles.price}>{`$${price}`}</Text>
       <Button
         mode="contained"
         style={styles.button}
