@@ -9,12 +9,16 @@ import {useQuery} from '@tanstack/react-query';
 import styles from './styles';
 import {fetchProductById} from '../../services/dataService';
 import FastImage from 'react-native-fast-image';
+import SnackBar from '../../components/SnackBar';
 
 export default function DetailsScreen({navigation, route}) {
   //use this itemId to fetch data from the server
   const {itemId} = route.params;
   //state to manage dialog visibility
   const [visible, setVisible] = useState(false);
+
+  //state to manage snackbar visibility
+  const [snackBarVisible, setSnackBarVisible] = useState(false);
 
   const {isLoading, data} = useQuery({
     queryKey: ['product', itemId],
@@ -27,6 +31,11 @@ export default function DetailsScreen({navigation, route}) {
 
   return (
     <View style={styles.screenContainer}>
+      <SnackBar
+        isVisible={snackBarVisible}
+        setIsVisible={setSnackBarVisible}
+        message={'Add to cart successfully!'}
+      />
       <AuthRequireDialog visible={visible} setVisible={setVisible} />
       <DetailHeader navigation={navigation} />
       <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
@@ -45,7 +54,10 @@ export default function DetailsScreen({navigation, route}) {
           </View>
         </View>
       </ScrollView>
-      <Footer setVisible={setVisible} />
+      <Footer
+        setVisible={setVisible}
+        setShowSnackBar={setSnackBarVisible}
+      />
     </View>
   );
 }

@@ -82,6 +82,12 @@ const styles = StyleSheet.create({
     backgroundColor: '#E82857',
     borderRadius: 8,
   },
+  loginButton: {
+    width: 238,
+    height: 40,
+    backgroundColor: '#0E0C22',
+    borderRadius: 8,
+  },
   text: {
     fontFamily: 'DM-Sans',
     fontSize: 16,
