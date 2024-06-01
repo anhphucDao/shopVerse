@@ -64,17 +64,6 @@ type detailsNavigationProp = CompositeNavigationProp<
     NativeStackNavigationProp<RootStackParamList>
   >
 >;
-// type homeNavigationProp = NativeStackNavigationProp<HomeStackParamList, 'home'>;
-
-// type DetailsScreenProps = NativeStackNavigationProp<
-//   HomeStackParamList,
-//   'details'
-// >;
-
-// type EmptyScreenProps = {
-//   navigation: NativeStackNavigationProp<TabStackParamList, 'Empty'>;
-//   route: {name: string};
-// };
 
 type EmptyScreenProps = CompositeScreenProps<
   NativeStackScreenProps<TabStackParamList, 'Empty'>,
