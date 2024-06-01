@@ -2,15 +2,25 @@ import React, {useEffect} from 'react';
 import {Searchbar} from 'react-native-paper';
 import styles from './styles';
 import {useRoute} from '@react-navigation/native';
+import useStore from '../../store';
+import {useNavigation} from '@react-navigation/native';
+import {
+  Keyboard,
+  NativeSyntheticEvent,
+  TextInputSubmitEditingEventData,
+} from 'react-native';
 
-export default function SearchBar({
-  searchQuery,
-  setSearchQuery,
-  debouncedInputValue,
-  setDebouncedInputValue,
-  // setSuggestionBoxVisible,
-  navigation,
-}) {
+export default function SearchBar() {
+  const navigation = useNavigation();
+
+  const searchQuery = useStore.use.searchQuery();
+  const setSearchQuery = useStore.use.setSearchQuery();
+  const debouncedInputValue = useStore.use.debouncedInputValue();
+  const setDebouncedInputValue = useStore.use.setDebouncedInputValue();
+  const UIState = useStore.use.UIState();
+
+  const setTextOnEnter = useStore.use.setTextOnEnter();
+
   const handleInputChange = (event: string) => {
     setSearchQuery(event);
   };
@@ -34,9 +44,24 @@ export default function SearchBar({
 
   const handlePress = () => {
     if (route.name === 'home') {
+      Keyboard.dismiss();
       navigation.navigate('search');
     }
   };
+
+  const onSubmitEditingHandler = (
+    event: NativeSyntheticEvent<TextInputSubmitEditingEventData>,
+  ) => {
+    console.log('event', event.nativeEvent.text);
+    setTextOnEnter(event.nativeEvent.text);
+    Keyboard.dismiss();
+    navigation.goBack();
+  };
+
+  useEffect(() => {
+    console.log('UIState', UIState);
+  }, [UIState]);
+
   return (
     <Searchbar
       placeholder="Search Product Name"
@@ -54,7 +79,9 @@ export default function SearchBar({
       // onBlur={() => {
       //   setSuggestionBoxVisible(false);
       // }}
+      onSubmitEditing={event => onSubmitEditingHandler(event)}
       onPress={() => handlePress()}
+      numberOfLines={1}
     />
   );
 }

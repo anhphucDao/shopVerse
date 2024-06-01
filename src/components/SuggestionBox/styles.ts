@@ -17,12 +17,11 @@ const styles = StyleSheet.create({
   },
   contentWrapper: {
     height: 40,
+    maxWidth: 342,
     width: '100%',
-    overflow: 'hidden',
     paddingHorizontal: 16,
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-evenly',
     gap: 16,
   },
   contentText: {
@@ -31,11 +30,31 @@ const styles = StyleSheet.create({
     color: '#0E0C22',
     fontWeight: 'semibold',
     marginLeft: 8,
+    flex: 1,
   },
 
   image: {
     width: 32,
     height: 32,
+  },
+
+  empty: {
+    width: 200,
+    height: 200,
+  },
+  emptyContainer: {
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 100,
+  },
+
+  text: {
+    fontFamily: 'DM-Sans',
+    fontSize: 20,
+    color: '#0E0C22',
+    fontWeight: 'bold',
+    marginTop: 16,
   },
 });
 

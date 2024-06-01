@@ -1,10 +1,4 @@
-import React, {
-  Dispatch,
-  SetStateAction,
-  useEffect,
-  useMemo,
-  useState,
-} from 'react';
+import React, {useEffect, useState} from 'react';
 import ShoppingBag from '../../components/ShoppingBag';
 import Avatar from '../../components/Avatar';
 import Filter from '../../components/Filter';
@@ -16,15 +10,7 @@ import DismissKeyboard from '../../components/DismissKeyboard';
 import ProfileDialog from '../../components/ProfileDialog';
 import Loader from '../../components/Loader';
 import Empty from '../../components/Empty';
-import SuggestionBox from '../../components/SuggestionBox';
-import {
-  FlatList,
-  LayoutChangeEvent,
-  Platform,
-  ScrollView,
-  Text,
-  View,
-} from 'react-native';
+import {FlatList, ScrollView, Text, View} from 'react-native';
 import {HomeScreenProps} from './type';
 import styles from './styles';
 import {useRef} from 'react';
@@ -37,8 +23,10 @@ import {
   fetchProductsByCategory,
 } from '../../services/dataService';
 import {Product as ProductI} from '../../types/data';
+import useStore from '../../store';
+import {useRoute} from '@react-navigation/native';
 
-export default function HomeScreen({navigation}: HomeScreenProps) {
+export default function HomeScreen({navigation}) {
   const bottomSheetRef = useRef<BottomSheet>(null);
 
   //function to open bottom sheet
@@ -133,6 +121,8 @@ export default function HomeScreen({navigation}: HomeScreenProps) {
     }, 0);
   };
 
+  const route = useRoute();
+
   //state to manage bottom sheet visibility
   const [isOpen, setIsOpen] = useState(false);
 
@@ -146,8 +136,14 @@ export default function HomeScreen({navigation}: HomeScreenProps) {
   const [categoryName, setCategoryName] = useState('');
 
   //state to manage input value
-  const [searchQuery, setSearchQuery] = useState('');
-  const [debouncedInputValue, setDebouncedInputValue] = useState('');
+  // const [searchQuery, setSearchQuery] = useState('');
+  // const [debouncedInputValue, setDebouncedInputValue] = useState('');
+
+  // const searchQuery = useStore.use.searchQuery();
+  // const setSearchQuery = useStore.use.setSearchQuery();
+
+  const debouncedInputValue = useStore.use.debouncedInputValue();
+  // const setDebouncedInputValue = useStore.use.setDebouncedInputValue();
 
   //state to manage price sorting order
 
@@ -165,58 +161,6 @@ export default function HomeScreen({navigation}: HomeScreenProps) {
   });
 
   const [isReset, setIsReset] = useState(false);
-
-  // //state to manage size of search bar
-
-  // const [searchBarSize, setSearchBarSize] = useState({
-  //   width: 0,
-  //   height: 0,
-  // });
-
-  // //state to manage size of header container
-  // const [headerSize, setHeaderSize] = useState({
-  //   width: 0,
-  //   height: 0,
-  // });
-
-  // //state to manage visibility of suggestion box
-  // const [suggestionBoxVisible, setSuggestionBoxVisible] = useState(false);
-
-  // //function to handle onLayout event
-  // const handleLayout = (
-  //   event: LayoutChangeEvent,
-  //   setState: Dispatch<SetStateAction<{width: number; height: number}>>,
-  // ) => {
-  //   const {width, height} = event.nativeEvent.layout;
-  //   setState({width, height});
-  // };
-
-  // //function to calculate the position for suggestion box
-  // const suggestionBoxPosition = useMemo(() => {
-  //   //padding top of screen container
-  //   const paddingTop = Platform.OS === 'ios' ? 60 : 24;
-  //   const marginTopSearchBar = 16;
-
-  //   //position of suggestion box
-  //   const top =
-  //     headerSize.height +
-  //     searchBarSize.height +
-  //     paddingTop +
-  //     marginTopSearchBar;
-
-  //   //left will equal to horizontal padding of screen container
-  //   const left = 24;
-
-  //   return {top, left};
-  // }, [searchBarSize, headerSize]);
-
-  // useEffect(() => {
-  //   console.log('SearchBarSize: ', searchBarSize);
-  // }, [searchBarSize]);
-
-  // useEffect(() => {
-  //   console.log('HeaderSize: ', headerSize);
-  // }, [headerSize]);
 
   const chipPressHandler = (category: string) => {
     console.log('Chip Pressed: ', category);
@@ -248,12 +192,17 @@ export default function HomeScreen({navigation}: HomeScreenProps) {
   });
 
   //since API filter & sort is not implemented, we will use this state to manage UI state
-  const [UIState, setUIState] = useState<Array<ProductI>>(
-    productsQuery.data || [],
-  );
+  // const [UIState, setUIState] = useState<Array<ProductI>>(
+  //   productsQuery.data || [],
+  // );
+
+  const UIState = useStore.use.UIState();
+  const setUIState = useStore.use.setUIState();
+  const textOnEnter = useStore.use.textOnEnter();
 
   useEffect(() => {
     setUIState(productsQuery.data || []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     productsQuery.data,
     categoriesQuery.data,
@@ -265,6 +214,7 @@ export default function HomeScreen({navigation}: HomeScreenProps) {
 
   useEffect(() => {
     setUIState(categoryProduct.data || []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [categoryName, chipPressed, categoryProduct.data]);
 
   //useEffect to print UIState
@@ -280,7 +230,7 @@ export default function HomeScreen({navigation}: HomeScreenProps) {
         : setUIState(productsQuery.data || []);
 
       resetSortAndFilter();
-    } else {
+    } else if (textOnEnter !== '') {
       const filteredProducts: Array<ProductI> = [];
 
       if (chipPressed) {
@@ -311,12 +261,20 @@ export default function HomeScreen({navigation}: HomeScreenProps) {
 
       setUIState(filteredProducts);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     debouncedInputValue,
     productsQuery.data,
     categoryProduct.data,
     chipPressed,
+    textOnEnter,
   ]);
+
+  useEffect(() => {
+    if (route.name === 'home') {
+      Keyboard.dismiss();
+    }
+  }, [route]);
 
   if (
     productsQuery.isLoading ||
@@ -354,14 +312,7 @@ export default function HomeScreen({navigation}: HomeScreenProps) {
               style={styles.searchBarWrapper}
               // onLayout={e => handleLayout(e, setSearchBarSize)}
             >
-              <SearchBar
-                searchQuery={searchQuery}
-                setSearchQuery={setSearchQuery}
-                debouncedInputValue={debouncedInputValue}
-                setDebouncedInputValue={setDebouncedInputValue}
-                // setSuggestionBoxVisible={setSuggestionBoxVisible}
-                navigation={navigation}
-              />
+              <SearchBar />
             </View>
           </DismissKeyboard>
 
