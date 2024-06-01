@@ -54,7 +54,11 @@ export default function DetailsScreen({navigation, route}) {
           </View>
         </View>
       </ScrollView>
-      <Footer setVisible={setVisible} price={data?.price} />
+      <Footer
+        setVisible={setVisible}
+        price={data?.price}
+        setShowSnackBar={setSnackBarVisible}
+      />
     </View>
   );
 }
