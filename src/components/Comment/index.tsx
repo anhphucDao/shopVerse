@@ -3,8 +3,9 @@ import {View, Text} from 'react-native';
 import {Chip} from 'react-native-paper';
 import styles from './styles';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import {CommentProps} from '../../types/props';
 
-export default function Comment({rating}) {
+export default function Comment({rating}: CommentProps) {
   return (
     <View style={styles.container}>
       <View style={styles.ratingContainer}>

@@ -1,11 +1,15 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import styles from './styles';
 import {Portal, Dialog, Button} from 'react-native-paper';
 import {Text} from 'react-native';
 import {ParamListBase, useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {AuthRequireDialogProps} from '../../types/props';
 
-export default function AuthRequireDialog({visible, setVisible}) {
+export default function AuthRequireDialog({
+  visible,
+  setVisible,
+}: AuthRequireDialogProps) {
   const navigation = useNavigation<NativeStackNavigationProp<ParamListBase>>();
 
   const onDismissHandler = () => {

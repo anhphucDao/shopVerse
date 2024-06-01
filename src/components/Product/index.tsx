@@ -1,14 +1,21 @@
 import React from 'react';
 import styles from './styles';
-import {Image, Pressable, Text, View} from 'react-native';
+import {Pressable, Text, View} from 'react-native';
 import FastImage from 'react-native-fast-image';
+import {ProductProps} from '../../types/props';
 
-export default function Product({name, price, imageUrl, navigation, itemId}) {
+export default function Product({
+  name,
+  price,
+  imageUrl,
+  navigation,
+  itemId,
+}: ProductProps) {
   return (
     <Pressable
       onPress={() => {
         navigation.navigate('details', {
-          itemId: itemId,
+          itemId: parseFloat(itemId),
         });
       }}>
       <View style={styles.product}>

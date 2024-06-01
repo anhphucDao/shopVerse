@@ -1,11 +1,16 @@
 import React from 'react';
 import {Portal, Modal, Button, IconButton} from 'react-native-paper';
-import {Text, View, Image} from 'react-native';
+import {Text, View} from 'react-native';
 import styles from './styles';
 import useStore from '../../store';
 import FastImage from 'react-native-fast-image';
+import {ProfileDialogProps} from '../../types/props';
 
-export default function ProfileDialog({visible, setVisible, navigation}) {
+export default function ProfileDialog({
+  visible,
+  setVisible,
+  navigation,
+}: ProfileDialogProps) {
   const onDismissHandler = () => {
     setVisible(false);
   };

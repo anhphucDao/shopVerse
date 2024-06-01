@@ -9,7 +9,8 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {Text} from 'react-native';
 import {getFocusedRouteNameFromRoute} from '@react-navigation/native';
 import {Platform} from 'react-native';
-const Tab = createBottomTabNavigator();
+import {TabStackParamList} from '../types/screen';
+const Tab = createBottomTabNavigator<TabStackParamList>();
 
 const screens = [
   {
@@ -66,12 +67,13 @@ const TabNavigator = () => {
       {screens.map(screen => {
         return (
           <Tab.Screen
-            name={screen.name}
+            name={screen.name as never}
             key={screen.name}
             component={screen.component}
             options={{
               tabBarLabel: ({focused, color}) => (
                 <Text
+                  // eslint-disable-next-line react-native/no-inline-styles
                   style={{
                     fontSize: 10,
                     fontFamily: 'DMSans-Medium',

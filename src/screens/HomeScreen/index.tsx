@@ -344,7 +344,7 @@ export default function HomeScreen({navigation}: HomeScreenProps) {
         ) : (
           <FlatList
             data={UIState}
-            renderItem={({item}) => (
+            renderItem={({item}: {item: ProductI}) => (
               <Product
                 key={item.id}
                 name={item.title}

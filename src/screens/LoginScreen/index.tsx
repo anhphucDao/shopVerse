@@ -157,7 +157,7 @@ export default function LoginScreen({navigation}: LoginScreenProps) {
         setEmail('');
         setPassword('');
 
-        navigation.navigate('Home');
+        navigation.navigate('Home' as never);
       } else {
         setMessage(unableToLoginMessage);
         setIsVisible(true);

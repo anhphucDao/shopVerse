@@ -1,4 +1,9 @@
+import {BottomTabScreenProps} from '@react-navigation/bottom-tabs';
+import {CompositeScreenProps} from '@react-navigation/native';
+import type {CompositeNavigationProp} from '@react-navigation/native';
+import type {BottomTabNavigationProp} from '@react-navigation/bottom-tabs';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import type {NativeStackScreenProps} from '@react-navigation/native-stack';
 
 type HomeStackParamList = {
   home: undefined;
@@ -7,10 +12,11 @@ type HomeStackParamList = {
 };
 
 type TabStackParamList = {
-  Home: HomeStackParamList;
+  Home: undefined;
   Wishlist: undefined;
   Cart: undefined;
   Profile: undefined;
+  Empty: undefined;
 };
 
 type RootStackParamList = {
@@ -18,19 +24,72 @@ type RootStackParamList = {
   Tab: TabStackParamList;
   Login: undefined;
   Register: undefined;
-  Home: undefined;
 };
 
-type HomeScreenProps = {
-  navigation: NativeStackNavigationProp<HomeStackParamList, 'home'>;
-};
+type HomeScreenProps = CompositeScreenProps<
+  NativeStackScreenProps<HomeStackParamList, 'home'>,
+  CompositeScreenProps<
+    BottomTabScreenProps<TabStackParamList>,
+    NativeStackScreenProps<RootStackParamList>
+  >
+>;
 
-type LoginScreenProps = {
-  navigation: NativeStackNavigationProp<RootStackParamList, 'Login'>;
-};
+type LoginScreenProps = NativeStackScreenProps<RootStackParamList, 'Login'>;
 
-type RegisterScreenProps = {
-  navigation: NativeStackNavigationProp<RootStackParamList, 'Register'>;
-};
+type RegisterScreenProps = NativeStackScreenProps<
+  RootStackParamList,
+  'Register'
+>;
 
-export type {HomeScreenProps, LoginScreenProps, RegisterScreenProps};
+type DetailsScreenProps = CompositeScreenProps<
+  NativeStackScreenProps<HomeStackParamList, 'details'>,
+  CompositeScreenProps<
+    BottomTabScreenProps<TabStackParamList>,
+    NativeStackScreenProps<RootStackParamList>
+  >
+>;
+
+type homeNavigationProp = CompositeNavigationProp<
+  NativeStackNavigationProp<HomeStackParamList, 'home'>,
+  CompositeNavigationProp<
+    BottomTabNavigationProp<TabStackParamList>,
+    NativeStackNavigationProp<RootStackParamList>
+  >
+>;
+
+type detailsNavigationProp = CompositeNavigationProp<
+  NativeStackNavigationProp<HomeStackParamList, 'details'>,
+  CompositeNavigationProp<
+    BottomTabNavigationProp<TabStackParamList>,
+    NativeStackNavigationProp<RootStackParamList>
+  >
+>;
+// type homeNavigationProp = NativeStackNavigationProp<HomeStackParamList, 'home'>;
+
+// type DetailsScreenProps = NativeStackNavigationProp<
+//   HomeStackParamList,
+//   'details'
+// >;
+
+// type EmptyScreenProps = {
+//   navigation: NativeStackNavigationProp<TabStackParamList, 'Empty'>;
+//   route: {name: string};
+// };
+
+type EmptyScreenProps = CompositeScreenProps<
+  NativeStackScreenProps<TabStackParamList, 'Empty'>,
+  NativeStackScreenProps<RootStackParamList>
+>;
+
+export type {
+  HomeScreenProps,
+  LoginScreenProps,
+  RegisterScreenProps,
+  DetailsScreenProps,
+  HomeStackParamList,
+  EmptyScreenProps,
+  homeNavigationProp,
+  detailsNavigationProp,
+  RootStackParamList,
+  TabStackParamList,
+};

@@ -1,13 +1,14 @@
 import React from 'react';
 import {IconButton, useTheme} from 'react-native-paper';
 import styles from './styles';
+import {FilterProps} from '../../types/props';
 
 export default function Filter({
   openBottomSheet,
   closeBottomSheet,
   isOpen,
   setIsOpen,
-}) {
+}: FilterProps) {
   const theme = useTheme();
 
   function bottomSheetHandler() {
