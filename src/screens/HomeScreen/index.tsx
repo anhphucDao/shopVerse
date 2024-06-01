@@ -23,8 +23,10 @@ import {
   fetchProductsByCategory,
 } from '../../services/dataService';
 import {Product as ProductI} from '../../types/data';
+import useStore from '../../store';
+import {useRoute} from '@react-navigation/native';
 
-export default function HomeScreen({navigation}: HomeScreenProps) {
+export default function HomeScreen({navigation}) {
   const bottomSheetRef = useRef<BottomSheet>(null);
 
   //function to open bottom sheet
@@ -119,6 +121,8 @@ export default function HomeScreen({navigation}: HomeScreenProps) {
     }, 0);
   };
 
+  const route = useRoute();
+
   //state to manage bottom sheet visibility
   const [isOpen, setIsOpen] = useState(false);
 
@@ -132,8 +136,14 @@ export default function HomeScreen({navigation}: HomeScreenProps) {
   const [categoryName, setCategoryName] = useState('');
 
   //state to manage input value
-  const [searchQuery, setSearchQuery] = useState('');
-  const [debouncedInputValue, setDebouncedInputValue] = useState('');
+  // const [searchQuery, setSearchQuery] = useState('');
+  // const [debouncedInputValue, setDebouncedInputValue] = useState('');
+
+  // const searchQuery = useStore.use.searchQuery();
+  // const setSearchQuery = useStore.use.setSearchQuery();
+
+  const debouncedInputValue = useStore.use.debouncedInputValue();
+  // const setDebouncedInputValue = useStore.use.setDebouncedInputValue();
 
   //state to manage price sorting order
 
@@ -182,12 +192,17 @@ export default function HomeScreen({navigation}: HomeScreenProps) {
   });
 
   //since API filter & sort is not implemented, we will use this state to manage UI state
-  const [UIState, setUIState] = useState<Array<ProductI>>(
-    productsQuery.data || [],
-  );
+  // const [UIState, setUIState] = useState<Array<ProductI>>(
+  //   productsQuery.data || [],
+  // );
+
+  const UIState = useStore.use.UIState();
+  const setUIState = useStore.use.setUIState();
+  const textOnEnter = useStore.use.textOnEnter();
 
   useEffect(() => {
     setUIState(productsQuery.data || []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     productsQuery.data,
     categoriesQuery.data,
@@ -199,6 +214,7 @@ export default function HomeScreen({navigation}: HomeScreenProps) {
 
   useEffect(() => {
     setUIState(categoryProduct.data || []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [categoryName, chipPressed, categoryProduct.data]);
 
   //useEffect to print UIState
@@ -214,7 +230,7 @@ export default function HomeScreen({navigation}: HomeScreenProps) {
         : setUIState(productsQuery.data || []);
 
       resetSortAndFilter();
-    } else {
+    } else if (textOnEnter !== '') {
       const filteredProducts: Array<ProductI> = [];
 
       if (chipPressed) {
@@ -245,12 +261,20 @@ export default function HomeScreen({navigation}: HomeScreenProps) {
 
       setUIState(filteredProducts);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     debouncedInputValue,
     productsQuery.data,
     categoryProduct.data,
     chipPressed,
+    textOnEnter,
   ]);
+
+  useEffect(() => {
+    if (route.name === 'home') {
+      Keyboard.dismiss();
+    }
+  }, [route]);
 
   if (
     productsQuery.isLoading ||
@@ -263,12 +287,20 @@ export default function HomeScreen({navigation}: HomeScreenProps) {
   return (
     <>
       <View style={styles.screenContainer}>
+        {/* <SuggestionBox
+          position={suggestionBoxPosition}
+          width={searchBarSize.width}
+          suggestionBoxVisible={suggestionBoxVisible}
+        /> */}
         <ProfileDialog
           visible={profileVisible}
           setVisible={setProfileVisible}
           navigation={navigation}
         />
-        <View style={styles.header}>
+        <View
+          style={styles.header}
+          // onLayout={e => handleLayout(e, setHeaderSize)}
+        >
           <Text style={styles.headerTitle}>Discover Products</Text>
           <View style={styles.container}>
             <ShoppingBag navigation={navigation} />
@@ -277,12 +309,12 @@ export default function HomeScreen({navigation}: HomeScreenProps) {
         </View>
         <View style={styles.discoverFilterContainer}>
           <DismissKeyboard>
-            <SearchBar
-              searchQuery={searchQuery}
-              setSearchQuery={setSearchQuery}
-              debouncedInputValue={debouncedInputValue}
-              setDebouncedInputValue={setDebouncedInputValue}
-            />
+            <View
+              style={styles.searchBarWrapper}
+              // onLayout={e => handleLayout(e, setSearchBarSize)}
+            >
+              <SearchBar />
+            </View>
           </DismissKeyboard>
 
           <Filter
@@ -325,7 +357,7 @@ export default function HomeScreen({navigation}: HomeScreenProps) {
             columnWrapperStyle={styles.productsColumn}
             numColumns={2}
             keyExtractor={item => item.id.toString()}
-            ItemSeparatorComponent={() => <View style={{height: 14}} />}
+            ItemSeparatorComponent={() => <View style={{height: 6}} />}
             style={styles.productContainer}
             showsVerticalScrollIndicator={false}
             refreshing={false}

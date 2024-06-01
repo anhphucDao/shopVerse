@@ -11,6 +11,8 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontFamily: 'DM-Sans',
     fontWeight: 'regular',
+    textAlign: 'auto',
+    lineHeight: undefined,
   },
 });
 

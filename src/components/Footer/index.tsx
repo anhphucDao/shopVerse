@@ -13,7 +13,7 @@ export default function Footer({setVisible, setShowSnackBar}) {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.price}>$9.85</Text>
+      <Text style={styles.price}>{`$${price}`}</Text>
       <Button
         mode="contained"
         style={styles.button}
