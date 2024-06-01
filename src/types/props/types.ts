@@ -1,5 +1,3 @@
-import {NavigationProp, ParamListBase} from '@react-navigation/native';
-
 type SuggestionBoxProps = {
   position: {
     top: number;
@@ -13,4 +11,4 @@ type SuggestionBoxProps = {
 //   navigation?: NavigationProp<ParamListBase>;
 // };
 
-export type {SuggestionBoxProps, SearchBarProps};
+export type {SuggestionBoxProps};

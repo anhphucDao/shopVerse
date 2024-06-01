@@ -11,7 +11,7 @@ import ProfileDialog from '../../components/ProfileDialog';
 import Loader from '../../components/Loader';
 import Empty from '../../components/Empty';
 import {FlatList, ScrollView, Text, View} from 'react-native';
-import {HomeScreenProps} from './type';
+import {HomeScreenProps} from '../../types/screen';
 import styles from './styles';
 import {useRef} from 'react';
 import {Keyboard} from 'react-native';
@@ -26,7 +26,7 @@ import {Product as ProductI} from '../../types/data';
 import useStore from '../../store';
 import {useRoute} from '@react-navigation/native';
 
-export default function HomeScreen({navigation}) {
+export default function HomeScreen({navigation}: HomeScreenProps) {
   const bottomSheetRef = useRef<BottomSheet>(null);
 
   //function to open bottom sheet

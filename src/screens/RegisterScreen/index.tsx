@@ -5,6 +5,8 @@ import styles from './styles';
 import {Button, TextInput} from 'react-native-paper';
 import SnackBar from '../../components/SnackBar';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {RegisterScreenProps} from '../../types/screen';
+import {userAccount} from '../../types/data';
 
 const emailError = 'Email is not valid';
 const passwordError = 'Password requires 6 characters and a special character';
@@ -14,7 +16,7 @@ const bothError = emailError + '\n' + passwordError;
 const createAccountMessage =
   'Account created successfully\nYou will be redirected to the login page in';
 
-export default function RegisterScreen({navigation}) {
+export default function RegisterScreen({navigation}: RegisterScreenProps) {
   const [showPassword, setShowPassword] = useState(false);
 
   //state to handle visibility of snackbar
@@ -59,12 +61,14 @@ export default function RegisterScreen({navigation}) {
       //check if there is already an account in async storage
       console.log(
         'previousData.some:',
-        previousData.some(account => account.email === debounceEmail),
+        previousData.some(
+          (accountToFind: userAccount) => accountToFind.email === debounceEmail,
+        ),
       );
 
       //check if there is already an account in async storage
       const accountExists = previousData.some(
-        account => account.email === debounceEmail,
+        (accountToFind: userAccount) => accountToFind.email === debounceEmail,
       );
 
       console.log('accountExists:', accountExists);
@@ -88,38 +92,6 @@ export default function RegisterScreen({navigation}) {
       // saving error
       setIsError(true);
       setMessage('Error register account');
-    }
-  };
-
-  //function to check if account already exists in async storage
-  //   const checkAccount = async () => {
-  //     try {
-  //       const value = await AsyncStorage.getItem('account');
-  //       if (value !== null) {
-  //         // value previously stored
-  //         //loop through the account data, to check if the email already exists
-  //         const accountData = JSON.parse(value);
-
-  //         return accountData.some(account => account.email === debounceEmail);
-  //       }
-
-  //       return false;
-  //     } catch (e) {
-  //       // error reading value
-
-  //       setMessage('Error register account');
-  //       return false;
-  //     }
-  //   };
-
-  //function to delete accountData in async storage
-
-  const deleteAccount = async () => {
-    try {
-      await AsyncStorage.removeItem('account');
-    } catch (e) {
-      // remove error
-      console.log('Error deleting account');
     }
   };
 
@@ -147,11 +119,6 @@ export default function RegisterScreen({navigation}) {
       setMessage('Error register account');
       return [];
     }
-  };
-
-  //function to toggle snack bar visibility
-  const toggleSnackBar = () => {
-    setIsVisible(!isVisible);
   };
 
   const eyeIconHandler = () => {
