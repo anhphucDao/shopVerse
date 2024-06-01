@@ -44,8 +44,7 @@ export default function SearchBar() {
 
   const handleFocus = () => {
     if (route.name === 'home') {
-      //@ts-expect-error
-      navigation.navigate('search');
+      navigation.navigate('search' as never);
       Keyboard.dismiss();
     }
   };
