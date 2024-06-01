@@ -11,7 +11,6 @@ export default function RatingFilter({
   setRatingFrom,
 }: RatingFilterProps) {
   const chipPressHandler = (rating: number) => {
-    // console.log('Rating Filter Pressed, ratingFrom', ratingFrom);
     rating === ratingFrom ? setRatingFrom(0) : setRatingFrom(rating);
   };
 
