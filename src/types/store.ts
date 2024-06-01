@@ -1,5 +1,3 @@
-import {Product} from './data';
-
 type StoreState = {
   isAuth: boolean;
   setIsAuth: (isAuth: boolean) => void;

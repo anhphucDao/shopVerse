@@ -2,10 +2,34 @@ import React from 'react';
 import {Portal, Modal, Button, IconButton} from 'react-native-paper';
 import {Text, View, Image} from 'react-native';
 import styles from './styles';
+import useStore from '../../store';
+import FastImage from 'react-native-fast-image';
 
-export default function ProfileDialog({visible, setVisible}) {
+export default function ProfileDialog({visible, setVisible, navigation}) {
   const onDismissHandler = () => {
     setVisible(false);
+  };
+
+  const isAuth = useStore.use.isAuth();
+  const setIsAuth = useStore.use.setIsAuth();
+
+  const imageSource = isAuth
+    ? require('../../assets/images/profileLarge.png')
+    : require('../../assets/images/user.png');
+
+  const onAuthButtonPress = () => {
+    if (isAuth) {
+      setIsAuth(false);
+      setVisible(false);
+    } else {
+      setVisible(false);
+      navigation.navigate('Login');
+    }
+  };
+
+  const onSettingsButtonPress = () => {
+    setVisible(false);
+    navigation.navigate('Profile');
   };
 
   return (
@@ -14,19 +38,20 @@ export default function ProfileDialog({visible, setVisible}) {
         visible={visible}
         onDismiss={onDismissHandler}
         contentContainerStyle={styles.container}>
-        <View style={styles.upperView}></View>
-        <Image
-          source={require('../../assets/images/profileLarge.png')}
-          style={styles.image}
-        />
+        <View style={styles.upperView} />
+        <FastImage source={imageSource} style={styles.image} />
         <IconButton
           icon="close"
           iconColor="white"
           style={styles.icon}
-          onPress={() => setVisible(false)}></IconButton>
+          onPress={() => setVisible(false)}
+        />
         <View style={styles.textContainer}>
-          <Text style={styles.name}>John Doe</Text>
-          <Text style={styles.phone}>(01)324383</Text>
+          <Text style={styles.name}>{`${isAuth ? 'John Doe' : 'User'}`}</Text>
+          <Text style={styles.phone}>
+            {' '}
+            {`${isAuth ? '(01)324383' : 'no info'}`}
+          </Text>
         </View>
         <View style={styles.buttonGroup}>
           <Button
@@ -36,20 +61,20 @@ export default function ProfileDialog({visible, setVisible}) {
             textColor="#676F81"
             contentStyle={styles.contentStyle}
             onPress={() => {
-              console.log('Settings pressed');
+              onSettingsButtonPress();
             }}>
             <Text style={styles.text}>Settings</Text>
           </Button>
           <Button
             mode="contained"
-            style={styles.logoutButton}
-            icon="logout"
+            style={isAuth ? styles.logoutButton : styles.loginButton}
+            icon={isAuth ? 'logout' : 'login'}
             textColor="white"
             contentStyle={styles.contentStyle}
             onPress={() => {
-              console.log('Logout pressed');
+              onAuthButtonPress();
             }}>
-            <Text style={styles.text}>Logout</Text>
+            <Text style={styles.text}>{`${isAuth ? 'Logout' : 'Login'}`}</Text>
           </Button>
         </View>
       </Modal>

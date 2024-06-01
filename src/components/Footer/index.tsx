@@ -2,10 +2,13 @@ import React from 'react';
 import {View, Text} from 'react-native';
 import {Button} from 'react-native-paper';
 import styles from './styles';
+import useStore from '../../store';
 
-export default function Footer({setVisible, price}) {
+export default function Footer({setVisible, setShowSnackBar}) {
+  const isAuth = useStore.use.isAuth();
+
   const handlePress = () => {
-    setVisible(true);
+    isAuth ? setShowSnackBar(true) : setVisible(true);
   };
 
   return (

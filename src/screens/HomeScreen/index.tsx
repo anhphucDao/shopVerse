@@ -295,6 +295,7 @@ export default function HomeScreen({navigation}) {
         <ProfileDialog
           visible={profileVisible}
           setVisible={setProfileVisible}
+          navigation={navigation}
         />
         <View
           style={styles.header}
@@ -302,7 +303,7 @@ export default function HomeScreen({navigation}) {
         >
           <Text style={styles.headerTitle}>Discover Products</Text>
           <View style={styles.container}>
-            <ShoppingBag />
+            <ShoppingBag navigation={navigation} />
             <Avatar setVisible={setProfileVisible} />
           </View>
         </View>

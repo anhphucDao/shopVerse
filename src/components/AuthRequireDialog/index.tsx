@@ -2,10 +2,19 @@ import React, {useEffect} from 'react';
 import styles from './styles';
 import {Portal, Dialog, Button} from 'react-native-paper';
 import {Text} from 'react-native';
+import {ParamListBase, useNavigation} from '@react-navigation/native';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 
 export default function AuthRequireDialog({visible, setVisible}) {
+  const navigation = useNavigation<NativeStackNavigationProp<ParamListBase>>();
+
   const onDismissHandler = () => {
     setVisible(false);
+  };
+
+  const onLoginButtonPress = () => {
+    setVisible(false);
+    navigation.navigate('Login');
   };
 
   return (
@@ -22,10 +31,10 @@ export default function AuthRequireDialog({visible, setVisible}) {
           </Text>
         </Dialog.Content>
         <Dialog.Actions>
-          <Button onPress={() => setVisible(false)}>
+          <Button onPress={() => onDismissHandler()}>
             <Text style={styles.close}>Close</Text>
           </Button>
-          <Button onPress={() => setVisible(false)}>
+          <Button onPress={() => onLoginButtonPress()}>
             <Text style={styles.login}>Login</Text>
           </Button>
         </Dialog.Actions>

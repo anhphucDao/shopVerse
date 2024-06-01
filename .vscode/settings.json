@@ -3,6 +3,7 @@
         "gorhom",
         "Pressable",
         "Searchbar",
-        "tanstack"
+        "tanstack",
+        "zustand"
     ]
 }
