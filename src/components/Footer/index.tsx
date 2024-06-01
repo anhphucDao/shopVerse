@@ -4,7 +4,7 @@ import {Button} from 'react-native-paper';
 import styles from './styles';
 import useStore from '../../store';
 
-export default function Footer({setVisible, setShowSnackBar}) {
+export default function Footer({setVisible, setShowSnackBar, price}) {
   const isAuth = useStore.use.isAuth();
 
   const handlePress = () => {
