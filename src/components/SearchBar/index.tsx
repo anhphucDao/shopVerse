@@ -42,10 +42,16 @@ export default function SearchBar() {
 
   const route = useRoute();
 
-  const handlePress = () => {
+  const handleFocus = () => {
+    if (route.name === 'home') {
+      navigation.navigate('search');
+      Keyboard.dismiss();
+    }
+  };
+
+  const onPressHandler = () => {
     if (route.name === 'home') {
       Keyboard.dismiss();
-      navigation.navigate('search');
     }
   };
 
@@ -61,6 +67,12 @@ export default function SearchBar() {
   useEffect(() => {
     console.log('UIState', UIState);
   }, [UIState]);
+
+  useEffect(() => {
+    if (route.name === 'home') {
+      Keyboard.dismiss();
+    }
+  }, [route.name]);
 
   return (
     <Searchbar
@@ -80,7 +92,8 @@ export default function SearchBar() {
       //   setSuggestionBoxVisible(false);
       // }}
       onSubmitEditing={event => onSubmitEditingHandler(event)}
-      onPress={() => handlePress()}
+      onFocus={() => handleFocus()}
+      onPress={() => onPressHandler()}
       numberOfLines={1}
     />
   );
