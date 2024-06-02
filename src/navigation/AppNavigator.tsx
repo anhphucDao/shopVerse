@@ -4,8 +4,9 @@ import SplashScreen from '../screens/SplashScreen/index';
 import TabNavigator from './TabNavigator';
 import LoginScreen from '../screens/LoginScreen';
 import RegisterScreen from '../screens/RegisterScreen';
+import {RootStackParamList} from '../types/screen';
 
-const RootStack = createNativeStackNavigator();
+const RootStack = createNativeStackNavigator<RootStackParamList>();
 
 const AppNavigator = () => {
   const [isLoading, setIsLoading] = useState(true);

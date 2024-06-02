@@ -44,7 +44,7 @@ export default function SearchBar() {
 
   const handleFocus = () => {
     if (route.name === 'home') {
-      navigation.navigate('search');
+      navigation.navigate('search' as never);
       Keyboard.dismiss();
     }
   };
@@ -81,16 +81,9 @@ export default function SearchBar() {
       value={searchQuery}
       style={styles.searchBar}
       traileringIconColor="#0E0C22"
-      rippleColor="#0E0C22"
       inputStyle={styles.input}
       iconColor="#0E0C22"
       placeholderTextColor="#C4C5C4"
-      // onFocus={() => {
-      //   setSuggestionBoxVisible(true);
-      // }}
-      // onBlur={() => {
-      //   setSuggestionBoxVisible(false);
-      // }}
       onSubmitEditing={event => onSubmitEditingHandler(event)}
       onFocus={() => handleFocus()}
       onPress={() => onPressHandler()}

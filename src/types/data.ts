@@ -1,5 +1,5 @@
 interface Product {
-  id: number;
+  id: string;
   title: string;
   price: string;
   category: string;
@@ -11,4 +11,9 @@ interface Product {
   };
 }
 
-export type {Product};
+interface userAccount {
+  email: string;
+  password: string;
+}
+
+export type {Product, userAccount};

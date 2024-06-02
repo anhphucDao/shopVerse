@@ -2,8 +2,9 @@ import React from 'react';
 import {View} from 'react-native';
 import styles from './styles';
 import {IconButton, Badge, useTheme} from 'react-native-paper';
+import {ShoppingBagProps} from '../../types/props';
 
-export default function ShoppingBag({navigation}) {
+export default function ShoppingBag({navigation}: ShoppingBagProps) {
   const theme = useTheme();
 
   const onShoppingBagPress = () => {

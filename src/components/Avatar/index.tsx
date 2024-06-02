@@ -3,8 +3,9 @@ import styles from './styles';
 import {Avatar} from 'react-native-paper';
 import {Pressable} from 'react-native';
 import useStore from '../../store';
+import {AvatarComponentProps} from '../../types/props';
 
-export default function AvatarComponent({setVisible}) {
+export default function AvatarComponent({setVisible}: AvatarComponentProps) {
   const isAuth = useStore.use.isAuth();
 
   const imageSource = isAuth

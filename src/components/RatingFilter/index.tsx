@@ -2,12 +2,15 @@ import React from 'react';
 import {View, Text} from 'react-native';
 import styles from './styles';
 import {Chip} from 'react-native-paper';
+import {RatingFilterProps} from '../../types/props';
 
 const ratingFilter = [5, 4, 3];
 
-export default function RatingFilter({ratingFrom, setRatingFrom}) {
+export default function RatingFilter({
+  ratingFrom,
+  setRatingFrom,
+}: RatingFilterProps) {
   const chipPressHandler = (rating: number) => {
-    // console.log('Rating Filter Pressed, ratingFrom', ratingFrom);
     rating === ratingFrom ? setRatingFrom(0) : setRatingFrom(rating);
   };
 

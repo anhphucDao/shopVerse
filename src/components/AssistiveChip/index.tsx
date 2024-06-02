@@ -2,13 +2,14 @@ import React from 'react';
 import {Text} from 'react-native';
 import {Chip} from 'react-native-paper';
 import styles from './styles';
+import {AssistiveChipProps} from '../../types/props';
 
 export default function AssistiveChip({
   title,
   onPress,
   categoryUI,
   chipPressed,
-}) {
+}: AssistiveChipProps) {
   return (
     <Chip
       style={styles.chip}

@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {ScrollView, View, Image, Text} from 'react-native';
+import {ScrollView, View, Text} from 'react-native';
 import DetailHeader from '../../components/DetailHeader';
 import Comment from '../../components/Comment';
 import Footer from '../../components/Footer';
@@ -10,9 +10,11 @@ import styles from './styles';
 import {fetchProductById} from '../../services/dataService';
 import FastImage from 'react-native-fast-image';
 import SnackBar from '../../components/SnackBar';
+import {DetailsScreenProps} from '../../types/screen';
 
-export default function DetailsScreen({navigation, route}) {
+export default function DetailsScreen({navigation, route}: DetailsScreenProps) {
   //use this itemId to fetch data from the server
+
   const {itemId} = route.params;
   //state to manage dialog visibility
   const [visible, setVisible] = useState(false);
@@ -47,14 +49,18 @@ export default function DetailsScreen({navigation, route}) {
               style={styles.image}
             />
           </View>
-          <Comment rating={data?.rating} />
+          <Comment rating={data?.rating || {rate: 0, count: 0}} />
           <View style={styles.textContainer}>
             <Text style={styles.title}>{data?.title}</Text>
             <Text style={styles.description}>{data?.description}</Text>
           </View>
         </View>
       </ScrollView>
-      <Footer setVisible={setVisible} price={data?.price} />
+      <Footer
+        setVisible={setVisible}
+        price={data?.price || '0'}
+        setShowSnackBar={setSnackBarVisible}
+      />
     </View>
   );
 }

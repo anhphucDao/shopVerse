@@ -7,6 +7,8 @@ import SnackBar from '../../components/SnackBar';
 import {Pressable} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import useStore from '../../store';
+import {LoginScreenProps} from '../../types/screen';
+import {userAccount} from '../../types/data';
 
 const unableToLoginMessage =
   'Unable to login \nPlease check your email or password again';
@@ -16,7 +18,7 @@ const passwordError = 'Password is not valid';
 
 const bothError = emailError + '\n' + passwordError;
 
-export default function LoginScreen({navigation}) {
+export default function LoginScreen({navigation}: LoginScreenProps) {
   const [showPassword, setShowPassword] = useState(false);
 
   //state to handle visibility of snackbar
@@ -114,9 +116,9 @@ export default function LoginScreen({navigation}) {
 
     if (accountData.length > 0) {
       const account = accountData.find(
-        account =>
-          account.email === debounceEmail &&
-          account.password === debouncePassword,
+        (accountToFind: userAccount) =>
+          accountToFind.email === debounceEmail &&
+          accountToFind.password === debouncePassword,
       );
 
       if (account) {
@@ -155,7 +157,7 @@ export default function LoginScreen({navigation}) {
         setEmail('');
         setPassword('');
 
-        navigation.navigate('Home');
+        navigation.navigate('Home' as never);
       } else {
         setMessage(unableToLoginMessage);
         setIsVisible(true);

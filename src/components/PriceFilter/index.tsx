@@ -3,14 +3,15 @@ import {View, Text} from 'react-native';
 import DismissKeyboard from '../../components/DismissKeyboard';
 import {RadioButton, TextInput} from 'react-native-paper';
 import styles from './styles';
+import {PriceFilterProps} from '../../types/props';
 
 export default function PriceFilter({
   priceOrder,
   setPriceOrder,
   setPriceRange,
   isReset,
-}) {
-  const optionHandler = order => {
+}: PriceFilterProps) {
+  const optionHandler = (order: string) => {
     setPriceOrder(order);
   };
 
@@ -49,8 +50,8 @@ export default function PriceFilter({
 
   useEffect(() => {
     if (isReset) {
-      setTextFrom(prev => '');
-      setTextTo(prev => '');
+      setTextFrom('');
+      setTextTo('');
     }
   }, [isReset]);
 

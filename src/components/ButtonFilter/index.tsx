@@ -2,7 +2,11 @@ import React from 'react';
 import {View} from 'react-native';
 import styles from './styles';
 import {Button} from 'react-native-paper';
-export default function ButtonFilter({applySortAndFilter, resetSortAndFilter}) {
+import {ButtonFilterProps} from '../../types/props';
+export default function ButtonFilter({
+  applySortAndFilter,
+  resetSortAndFilter,
+}: ButtonFilterProps) {
   return (
     <View style={styles.container}>
       <Button
