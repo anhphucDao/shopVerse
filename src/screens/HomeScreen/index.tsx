@@ -230,7 +230,10 @@ export default function HomeScreen({navigation}: HomeScreenProps) {
         : setUIState(productsQuery.data || []);
 
       resetSortAndFilter();
-    } else if (textOnEnter !== '') {
+    } else if (
+      textOnEnter !== '' ||
+      (debouncedInputValue !== '' && route.name === 'search')
+    ) {
       const filteredProducts: Array<ProductI> = [];
 
       if (chipPressed) {
