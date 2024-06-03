@@ -18,8 +18,10 @@ export default function SuggestionBox() {
     <View style={styles.container}>
       {UIState.length > 0 ? (
         UIState.slice(0, 10).map(item => (
-          <Pressable onPress={() => onTextContainerPress(item.title)}>
-            <View key={item.id} style={styles.contentWrapper}>
+          <Pressable
+            onPress={() => onTextContainerPress(item.title)}
+            key={item.id}>
+            <View style={styles.contentWrapper}>
               <FastImage
                 source={{uri: item.image}}
                 style={styles.image}
