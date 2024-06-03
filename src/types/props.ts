@@ -94,6 +94,22 @@ interface SnackBarProps {
   message: string;
   countdown?: number;
 }
+type Route = {
+  key: string;
+  name: string;
+  params?: Record<string, unknown>;
+  state: NavigationState;
+};
+
+type NavigationState = {
+  type: string;
+  key: string;
+  routeNames: string[];
+  routes: Route[];
+  index: number;
+  stale: boolean;
+  state?: NavigationState; // For nested navigators
+};
 
 export type {
   AssistiveChipProps,
@@ -111,4 +127,5 @@ export type {
   RatingFilterProps,
   ShoppingBagProps,
   SnackBarProps,
+  NavigationState,
 };

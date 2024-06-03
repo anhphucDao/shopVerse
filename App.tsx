@@ -8,6 +8,12 @@ import {enableScreens} from 'react-native-screens';
 
 import {QueryClient, QueryClientProvider} from '@tanstack/react-query';
 
+import {NavigationContainerRef} from '@react-navigation/native';
+import {RootStackParamList} from './src/types/screen';
+
+export const navigationRef =
+  React.createRef<NavigationContainerRef<RootStackParamList>>();
+
 const fontConfig = {
   fontFamily: 'DMSans',
 };
@@ -39,7 +45,7 @@ export default function App() {
     <QueryClientProvider client={queryClient}>
       <GestureHandlerRootView style={{flex: 1}}>
         <PaperProvider theme={theme}>
-          <NavigationContainer>
+          <NavigationContainer ref={navigationRef}>
             <BottomSheetModalProvider>
               <AppNavigator />
             </BottomSheetModalProvider>
