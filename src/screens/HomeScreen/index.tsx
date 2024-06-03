@@ -25,6 +25,8 @@ import {
 import {Product as ProductI} from '../../types/data';
 import useStore from '../../store';
 import {useRoute} from '@react-navigation/native';
+import {navigationRef} from '../../../App';
+import getActiveRouteName from '../../utilities/getActiveRouteName';
 
 export default function HomeScreen({navigation}: HomeScreenProps) {
   const bottomSheetRef = useRef<BottomSheet>(null);
@@ -122,6 +124,8 @@ export default function HomeScreen({navigation}: HomeScreenProps) {
   };
 
   const route = useRoute();
+
+  const state = navigationRef.current?.getRootState();
 
   //state to manage bottom sheet visibility
   const [isOpen, setIsOpen] = useState(false);
@@ -224,7 +228,19 @@ export default function HomeScreen({navigation}: HomeScreenProps) {
 
   //useEffect to search product
   useEffect(() => {
+    console.log('debouncedInputValue: ', debouncedInputValue);
+    console.log('route.name', route.name);
+
+    let activeRouteName = '';
+
+    if (state) {
+      activeRouteName = getActiveRouteName(state);
+      console.log('activeRouteName: ', activeRouteName);
+    }
+
     if (debouncedInputValue === '') {
+      console.log('ran the first condition');
+
       chipPressed
         ? setUIState(categoryProduct.data || [])
         : setUIState(productsQuery.data || []);
@@ -232,8 +248,10 @@ export default function HomeScreen({navigation}: HomeScreenProps) {
       resetSortAndFilter();
     } else if (
       textOnEnter !== '' ||
-      (debouncedInputValue !== '' && route.name === 'search')
+      (debouncedInputValue !== '' && activeRouteName === 'search')
     ) {
+      console.log('ran here');
+
       const filteredProducts: Array<ProductI> = [];
 
       if (chipPressed) {
