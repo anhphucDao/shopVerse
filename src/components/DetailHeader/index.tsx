@@ -2,9 +2,9 @@ import React from 'react';
 import {View} from 'react-native';
 import styles from './styles';
 import {IconButton, useTheme} from 'react-native-paper';
-// import BottomSheet from '../../components/BottomSheet';
+import {DetailHeaderProps} from '../../types/props';
 
-export default function DetailHeader({navigation}) {
+export default function DetailHeader({navigation}: DetailHeaderProps) {
   const theme = useTheme();
 
   return (

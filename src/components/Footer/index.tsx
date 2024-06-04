@@ -2,15 +2,23 @@ import React from 'react';
 import {View, Text} from 'react-native';
 import {Button} from 'react-native-paper';
 import styles from './styles';
+import useStore from '../../store';
+import {FooterProps} from '../../types/props';
 
-export default function Footer({setVisible}) {
+export default function Footer({
+  setVisible,
+  setShowSnackBar,
+  price,
+}: FooterProps) {
+  const isAuth = useStore.use.isAuth();
+
   const handlePress = () => {
-    setVisible(true);
+    isAuth ? setShowSnackBar(true) : setVisible(true);
   };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.price}>$9.85</Text>
+      <Text style={styles.price}>{`$${price}`}</Text>
       <Button
         mode="contained"
         style={styles.button}

@@ -1,4 +1,4 @@
-import {StyleSheet} from 'react-native';
+import {Platform, StyleSheet} from 'react-native';
 
 const styles = StyleSheet.create({
   container: {
@@ -18,8 +18,9 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
     paddingHorizontal: 24,
-    paddingTop: 60,
+    paddingTop: Platform.OS === 'ios' ? 60 : 24,
     backgroundColor: '#fff',
+    // position: 'relative',
   },
   discoverFilterContainer: {
     flexDirection: 'row',
@@ -40,9 +41,19 @@ const styles = StyleSheet.create({
   assistiveChipContainer: {
     marginTop: 12,
     minHeight: 32,
+    maxHeight: 32,
   },
   productContainer: {
     marginTop: 16,
+    paddingHorizontal: Platform.OS === 'ios' ? 4 : 14,
+    maxWidth: 394,
+  },
+  productsColumn: {
+    justifyContent: 'space-between',
+  },
+
+  searchBarWrapper: {
+    flex: 1,
   },
 });
 

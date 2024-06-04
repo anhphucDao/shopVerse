@@ -4,13 +4,13 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import HomeNavigator from './HomeNavigator';
 // import DetailsScreen from '../screens/DetailsScreen';
 import EmptyScreen from '../screens/EmptyScreen';
-import LoginScreen from '../screens/LoginScreen';
 import {useTheme} from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {Text} from 'react-native';
 import {getFocusedRouteNameFromRoute} from '@react-navigation/native';
-
-const Tab = createBottomTabNavigator();
+import {Platform} from 'react-native';
+import {TabStackParamList} from '../types/screen';
+const Tab = createBottomTabNavigator<TabStackParamList>();
 
 const screens = [
   {
@@ -33,7 +33,7 @@ const screens = [
   },
   {
     name: 'Profile',
-    component: LoginScreen,
+    component: EmptyScreen,
     iconName: 'account-outline',
     iconNameFocused: 'account',
   },
@@ -42,49 +42,38 @@ const screens = [
 const TabNavigator = () => {
   const theme = useTheme(); // Access the theme here
 
-  // console.log(theme);
   return (
     <Tab.Navigator
-      // screenOptions={{
-      //   headerShown: false,
-      //   tabBarStyle: {
-      //     flexDirection: 'row',
-      //     shadowColor: '#000',
-      //     shadowOpacity: 0.1,
-      //     shadowOffset: {width: 0, height: -1},
-      //     elevation: 10, // This is for Android
-      //   },
-      // }}
       screenOptions={({route}) => ({
         headerShown: false,
         tabBarStyle: {
           display:
-            getFocusedRouteNameFromRoute(route) === 'details' ? 'none' : 'flex',
+            getFocusedRouteNameFromRoute(route) === 'details' ||
+            getFocusedRouteNameFromRoute(route) === 'search'
+              ? 'none'
+              : 'flex',
           flexDirection: 'row',
           shadowColor: '#000',
           shadowOpacity: 0.1,
           shadowOffset: {width: 0, height: -1},
           elevation: 10, // This is for Android
+          ...(Platform.OS === 'android' && {
+            height: 60,
+            paddingBottom: 10,
+            paddingTop: 10,
+          }),
         },
-        // tabBarVisible: (route => {
-        //   if (route.name === 'Home') {
-        //     const routeName = getFocusedRouteNameFromRoute(route) ?? 'Home';
-        //     console.log('routeName from: ', routeName);
-        //     return routeName !== 'details';
-        //   }
-
-        //   return true;
-        // })(route),
       })}>
       {screens.map(screen => {
         return (
           <Tab.Screen
-            name={screen.name}
+            name={screen.name as never}
             key={screen.name}
             component={screen.component}
             options={{
               tabBarLabel: ({focused, color}) => (
                 <Text
+                  // eslint-disable-next-line react-native/no-inline-styles
                   style={{
                     fontSize: 10,
                     fontFamily: 'DMSans-Medium',

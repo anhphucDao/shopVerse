@@ -2,9 +2,14 @@ import React from 'react';
 import {View} from 'react-native';
 import styles from './styles';
 import {IconButton, Badge, useTheme} from 'react-native-paper';
+import {ShoppingBagProps} from '../../types/props';
 
-export default function ShoppingBag() {
+export default function ShoppingBag({navigation}: ShoppingBagProps) {
   const theme = useTheme();
+
+  const onShoppingBagPress = () => {
+    navigation.navigate('Cart');
+  };
 
   return (
     <View style={styles.container}>
@@ -14,7 +19,7 @@ export default function ShoppingBag() {
         iconColor={theme.colors.primary}
         style={styles.icon}
         onPress={() => {
-          console.log('Shopping bag pressed');
+          onShoppingBagPress();
         }}
       />
       <Badge style={styles.badge} size={16}>

@@ -2,7 +2,11 @@ import React from 'react';
 import {View} from 'react-native';
 import styles from './styles';
 import {Button} from 'react-native-paper';
-export default function ButtonFilter() {
+import {ButtonFilterProps} from '../../types/props';
+export default function ButtonFilter({
+  applySortAndFilter,
+  resetSortAndFilter,
+}: ButtonFilterProps) {
   return (
     <View style={styles.container}>
       <Button
@@ -11,6 +15,7 @@ export default function ButtonFilter() {
         labelStyle={styles.resetLabel}
         onPress={() => {
           console.log('Reset button pressed');
+          resetSortAndFilter();
         }}
         contentStyle={styles.contentStyle}>
         Reset
@@ -24,6 +29,7 @@ export default function ButtonFilter() {
         contentStyle={styles.contentStyle}
         onPress={() => {
           console.log('Apply button pressed');
+          applySortAndFilter();
         }}>
         Apply
       </Button>

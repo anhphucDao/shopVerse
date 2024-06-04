@@ -1,9 +1,27 @@
-import React from 'react';
-import {View, Text} from 'react-native';
+import React, {useEffect} from 'react';
+import {Text} from 'react-native';
 import {Portal, Snackbar} from 'react-native-paper';
 import styles from './styles';
+import {SnackBarProps} from '../../types/props';
 
-export default function SnackBar({isVisible, setIsVisible}) {
+export default function SnackBar({
+  isVisible,
+  setIsVisible,
+  message,
+  countdown = 0,
+}: SnackBarProps) {
+  useEffect(() => {
+    let timer: NodeJS.Timeout | undefined;
+    if (isVisible) {
+      timer = setTimeout(() => {
+        setIsVisible(false);
+      }, 5000);
+    }
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [isVisible, setIsVisible]);
+
   return (
     <Portal>
       <Snackbar
@@ -17,10 +35,9 @@ export default function SnackBar({isVisible, setIsVisible}) {
         }}
         icon="close"
         duration={5000}>
-        <Text style={styles.text}>Unable to login</Text>
-        <Text style={styles.textUnder}>
-          Please check your email or password again
-        </Text>
+        <Text style={styles.text}>{`${message} ${
+          countdown > 0 ? countdown : ''
+        }`}</Text>
       </Snackbar>
     </Portal>
   );

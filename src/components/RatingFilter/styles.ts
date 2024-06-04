@@ -26,11 +26,23 @@ const styles = StyleSheet.create({
     height: 32,
     borderRadius: 8,
   },
+  chipSelected: {
+    backgroundColor: '#0E0C22',
+    width: 106,
+    height: 32,
+    borderRadius: 8,
+  },
   chipText: {
     fontFamily: 'DM-Sans',
     fontSize: 12,
     fontWeight: 'regular',
     color: '#0E0C22',
+  },
+  chipTextSelected: {
+    fontFamily: 'DM-Sans',
+    fontSize: 12,
+    fontWeight: 'regular',
+    color: '#fff',
   },
 });
 

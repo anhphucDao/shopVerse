@@ -2,8 +2,10 @@ import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import HomeScreen from '../screens/HomeScreen/index';
 import DetailsScreen from '../screens/DetailsScreen/index';
+import SearchScreen from '../screens/SearchScreen/index';
+import {HomeStackParamList} from '../types/screen';
 
-const HomeStack = createNativeStackNavigator();
+const HomeStack = createNativeStackNavigator<HomeStackParamList>();
 
 const HomeNavigator = () => {
   return (
@@ -13,6 +15,7 @@ const HomeNavigator = () => {
       }}>
       <HomeStack.Screen name="home" component={HomeScreen} />
       <HomeStack.Screen name="details" component={DetailsScreen} />
+      <HomeStack.Screen name="search" component={SearchScreen} />
     </HomeStack.Navigator>
   );
 };
